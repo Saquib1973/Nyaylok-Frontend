@@ -4,6 +4,7 @@ import Wrapper from "../Components/Wrapper";
 const Error = () => {
   return (
     <Wrapper>
+      <h1>Error</h1>
       <p className="text-white">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
         repudiandae sint eveniet itaque ratione vero. Id, in eos voluptatibus

@@ -8,6 +8,7 @@ import RegisterCase from "./Pages/RegisterCase";
 import ViewCases from "./Pages/ViewCases";
 import Error from "./Pages/Error";
 import Home from "./Pages/Home";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       </Routes>
       <div className="h-screen bg-[#000000]" id="abc" />
       <div className="h-screen bg-[#000000]" />
+      <Footer />
     </div>
   );
 }
