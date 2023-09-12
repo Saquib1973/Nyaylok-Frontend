@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../Utils/medium-poster-narendra-modi-ji-poster-poster-for-wall-decoration-original-imafqqrrsvjcnkqg.webp";
+// import img from "../Utils/medium-poster-narendra-modi-ji-poster-poster-for-wall-decoration-original-imafqqrrsvjcnkqg.webp";
 const Footer = () => {
   return (
     <div className="bg-blackPrim py-2">
