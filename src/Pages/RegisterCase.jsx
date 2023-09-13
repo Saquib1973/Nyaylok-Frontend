@@ -40,8 +40,8 @@ const RegisterCase = () => {
         <div className="bg-gray-600 bg-opacity-50 rounded-xl h-2/3 w-full mb-10 flex flex-col items-center justify-evenly">
           <p className="heading">Register case</p>
           <div className="flex gap-8 flex-col w-full items-center">
-            <InputN />
-            <InputN />
+            <InputN name={"intrestin"} type={"text"} />
+            <InputN name={"dummy"} type={"text"} />
             {/* Display selected flavors */}
             {selectedCases.length !== 0 && (
               <div className="flex text-xs sm:text-base md:text-xl  justify-center gap-4 w-2/3 items-center">
@@ -75,7 +75,7 @@ const RegisterCase = () => {
                 })}
               </datalist>
             </div>
-            <InputN />
+            <InputN type={"text"} name={"dummy2"} />
           </div>
           <Button />
         </div>
