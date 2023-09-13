@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "./../Components/Wrapper";
 import backgroundImage from "../Utils/background2.jpg";
 import backgroundImage2 from "../Utils/background3.jpg";
 import { BsSearch } from "react-icons/bs";
+import Input from "../Components/Input";
+// Count box component
+const CountBox = ({ count, name, index }) => {
+  return (
+    <div
+      className={`transition-all cursor-pointer hover:scale-105 hover:-translate-y-1 active:scale-95 duration-700 ${
+        index % 2 === 0
+          ? "bg-white text-black hover:text-redPrim hover:bg-white"
+          : "text-white bg-redPrim hover:bg-white hover:text-redPrim"
+      } h-32 md:h-48 w-32 md:w-48 rounded-2xl flex flex-col items-center justify-evenly px-10`}
+    >
+      <p className="text-3xl md:text-6xl font-semibold">{count}</p>
+      <p>{name}</p>
+    </div>
+  );
+};
+
 const Home = () => {
+  // This data need to be fetched from the bacckend and displayed
+  //eslint-disable-next-line
+  const [countData, setCountData] = useState([
+    { name: "Completed", count: 50 },
+    { name: "OnGoing", count: 250 },
+    { name: "Registered", count: 590 },
+  ]);
   return (
     <Wrapper>
       {/* First Section of Home Page */}
@@ -13,6 +37,7 @@ const Home = () => {
       >
         <div className="w-full md:w-2/3 lg:w-1/2 flex gap-4 flex-col">
           <p className="text-white text-right font-julius">
+            {/* Random Quote to be generated here */}
             “When freedom does not have a purpose, when it does not wish to know
             anything about the rule of law engraved in the hearts of men and
             women, when it does not listen to the voice of conscience, it turns
@@ -24,22 +49,15 @@ const Home = () => {
       </div>
       {/* Section 2 of Home Page to keep a count on the number of cases */}
       <div className="bg-black mt-16 h-screen py-20  px-10 flex flex-col gap-20 md:gap-40">
-        <p className="text-white text-xl md:text-3xl lg:text-5xl tracking-widest">
-          Milestones
-        </p>
+        <p className="heading">Milestones</p>
         <div className="flex-col md:flex-row flex gap-12 flex-wrap justify-between w-full items-center">
-          <div className="bg-white h-32 md:h-48 w-32 md:w-48 rounded-2xl flex flex-col items-center justify-evenly px-10">
-            <p className="text-black text-3xl md:text-6xl font-semibold">69</p>
-            <p className="text-black">Lorem ipsum dolor sit amet.</p>
-          </div>
-          <div className="bg-red-600/80 h-32 md:h-48 w-32 md:w-48 rounded-2xl flex flex-col items-center justify-evenly px-10">
-            <p className="text-white text-3xl md:text-6xl font-semibold">69</p>
-            <p className="text-white">Lorem ipsum dolor sit amet.</p>
-          </div>
-          <div className="bg-white h-32 md:h-48 w-32 md:w-48 rounded-2xl flex flex-col items-center justify-evenly px-10">
-            <p className="text-black text-3xl md:text-6xl font-semibold">69</p>
-            <p className="text-black">Lorem ipsum dolor sit amet.</p>
-          </div>
+          {countData.map((item, index) => {
+            return (
+              <div key={index}>
+                <CountBox count={item.count} name={item.name} index={index} />
+              </div>
+            );
+          })}
         </div>
       </div>
       {/* Section 3 of Home Page to get common user a case's number */}
@@ -47,17 +65,13 @@ const Home = () => {
         className="py-20 h-screen pb-20 lg:pb-10 bg-no-repeat bg-opacity-5 bg-center bg-contain rounded-md px-10"
         style={{ backgroundImage: `url(${backgroundImage2})` }}
       >
-        <p className="text-2xl sm:text-3xl md:text-5xl pl">Get Case Detail</p>
+        <p className="heading">Get Case Detail</p>
         <div className="h-full py-64 w-full sm:w-2/3 mx-auto relative">
           <div className="relative">
-            <input
-              type="text"
-              placeholder="Search"
-              className="bg-gray-400 placeholder:text-white outline-none rounded-2xl p-3 bg-opacity-60 px-12 w-full text-xl md:text-3xl"
-            />
+            <Input type={"text"} placeholder={"Search"} />
             <BsSearch
-              className="absolute top-[20%] text-4xl right-5 cursor-pointer"
-              onClick={() => alert("hello")}
+              className="absolute top-[20%] text-4xl right-5 cursor-pointer active:scale-75 duration-300 transition-all "
+              onClick={() => console.log("hello")}
             />
           </div>
         </div>

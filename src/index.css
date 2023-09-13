@@ -1,2 +1,9 @@
 @tailwind base; @tailwind components; @tailwind utilities;
 
+@layer components {
+    .heading{
+        @apply text-white text-xl md:text-3xl lg:text-5xl tracking-widest
+    }
+ 
+}
+

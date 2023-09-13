@@ -9,10 +9,12 @@ import ViewCases from "./Pages/ViewCases";
 import Error from "./Pages/Error";
 import Home from "./Pages/Home";
 import Footer from "./Components/Footer";
+import AboutUs from "./Pages/AboutUs";
+import UserInfo from "./Pages/UserInfo";
 
 function App() {
   return (
-    <div className="App font-ubantu">
+    <div className="App font-ubantu select-none">
       <Header />
       <Routes>
         <Route path={`/`} element={<Home />} />
@@ -21,6 +23,8 @@ function App() {
         <Route path={`/updateCase/:id`} element={<UpdateCase />} />
         <Route path={`/registerCase`} element={<RegisterCase />} />
         <Route path={`/viewCases`} element={<ViewCases />} />
+        <Route path={`/aboutUs`} element={<AboutUs />} />
+        <Route path={`/user`} element={<UserInfo />} />
         <Route path={`/404`} element={<Error />} />
         <Route path={`*`} element={<Navigate to="/404" />} />
       </Routes>

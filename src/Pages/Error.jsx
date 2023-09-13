@@ -1,18 +1,24 @@
 import React from "react";
-import Wrapper from "../Components/Wrapper";
-
+import error from "../Utils/404.jpg";
+import { Link } from "react-router-dom";
 const Error = () => {
   return (
-    <Wrapper>
-      <h1>Error</h1>
-      <p className="text-white">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-        repudiandae sint eveniet itaque ratione vero. Id, in eos voluptatibus
-        temporibus dignissimos voluptas similique dolorum totam ea reiciendis
-        officiis. Omnis iste praesentium expedita nulla ullam! Nisi doloremque
-        necessitatibus dolores quisquam dolor!{" "}
-      </p>
-    </Wrapper>
+    <>
+      <div
+        className="h-screen bg-contain bg-no-repeat bg-center bg-[#10110F] "
+        style={{ backgroundImage: `url(${error})` }}
+      >
+        <div className="text-white h-full w-full flex items-center justify-center">
+          <Link
+            to={"/"}
+            className="bg-gray-800 px-2 lg:px-4 py-1 lg:py-2 rounded-xl rounded-tl-none rounded-br-none cursor-pointer ml-[40vw] mt-[12vh] sm:mt-[4vh] md:mt-[6vh] lg:mt-[8vh] text-sm md:text-lg lg:text-2xl transition-all duration-500 hover:rounded-b-none border-b-4 border-transparent hover:border-redPrim"
+          >
+            {" "}
+            Return
+          </Link>
+        </div>
+      </div>
+    </>
   );
 };
 

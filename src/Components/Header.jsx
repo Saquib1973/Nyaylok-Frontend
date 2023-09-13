@@ -3,23 +3,24 @@ import { AiFillHome } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { BsThreeDots } from "react-icons/bs";
+import { loggedIn } from "./RenderData";
+//Scroll Top Function
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
 const Header = () => {
-  const loggedIn = [
-    { name: "Register Case", link: "registerCase" },
-    { name: "View Case", link: "viewCases" },
-  ];
-
+  // States
   //eslint-disable-next-line
   const [registerd, setRegisterd] = useState(true);
   const [userState, setUserState] = useState(false);
   const [scroll, setScroll] = useState(false);
-  const [mobilePress, setMobilePress] = useState(true);
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  const [mobilePress, setMobilePress] = useState(false);
+  // Scroll to top onclick fucntion
+
+  // Useeffect to handle the scrollY , if anyything less than 80 then island will shrink
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY > 80) {
@@ -35,29 +36,28 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scroll]);
+  // Long Press Setup
   let pressTimer;
   const startPress = () => {
     pressTimer = setTimeout(() => {
       setScroll(false);
       setMobilePress(false);
-      console.log("Long press detected!");
     }, 500);
   };
   const endPress = () => {
     clearTimeout(pressTimer);
   };
-  console.log(mobilePress);
   return (
     <div className=" z-10 w-full flex justify-center py-8 bg-transparent opacity-95  fixed left-0 top-0 ">
       <div
-        className={`dynamic-island active:scale-95 flex justify-around items-center bg-white text-black px-2 sm:py-4 rounded-full ${
-          mobilePress ? "h-16" : "h-20"
-        } sm:h-16 shadow-inner border-4 border-transparent hover:border-redPrim transition-all duration-300 ${
+        className={`active:scale-95 delay-75 flex justify-around items-center bg-white text-black px-2 sm:py-4 rounded-full ${
+          mobilePress ? "h-16" : "h-14"
+        } sm:h-16 shadow-inner border-4 border-transparent hover:border-redPrim transition-all  duration-300 ${
           registerd
             ? userState
               ? `w-[50%] lg:w-[30%]`
-              : `w-[${scroll ? `40%` : `50%`}] lg:w-[${scroll ? `10%` : `30%`}]`
-            : ` w-[40%] lg:w-[10%]`
+              : `w-[${scroll ? `40%` : `50%`}] lg:w-[${scroll ? `15%` : `30%`}]`
+            : ` w-[40%] lg:w-[15%]`
         } transition-all`}
         onMouseDown={startPress}
         onMouseUp={endPress}
@@ -68,12 +68,16 @@ const Header = () => {
         {userState ? (
           registerd ? (
             <div className="flex items-center justify-evenly w-full">
-              <p
+              <Link
+                to={"user"}
                 className="hover:cursor-pointer"
-                onClick={() => setUserState(!userState)}
+                onClick={() => {
+                  setUserState(!userState);
+                  scrollToTop();
+                }}
               >
                 User
-              </p>
+              </Link>
               <p
                 onClick={() => {
                   setRegisterd(false);
