@@ -15,7 +15,7 @@ import UserInfo from "./Pages/UserInfo";
 function App() {
   return (
     <div className="App font-ubantu select-none">
-      <Header />
+      <Header /> 
       <Routes>
         <Route path={`/`} element={<Home />} />
         <Route path={`/login`} element={<Login />} />
@@ -28,6 +28,7 @@ function App() {
         <Route path={`/404`} element={<Error />} />
         <Route path={`*`} element={<Navigate to="/404" />} />
       </Routes>
+      
       <Footer />
     </div>
   );
