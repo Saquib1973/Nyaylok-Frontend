@@ -12,7 +12,7 @@ import Footer from "./Components/Footer";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App font-ubantu">
       <Header />
       <Routes>
         <Route path={`/`} element={<Home />} />
@@ -24,8 +24,6 @@ function App() {
         <Route path={`/404`} element={<Error />} />
         <Route path={`*`} element={<Navigate to="/404" />} />
       </Routes>
-      <div className="h-screen bg-[#000000]" id="abc" />
-      <div className="h-screen bg-[#000000]" />
       <Footer />
     </div>
   );

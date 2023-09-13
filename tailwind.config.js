@@ -10,6 +10,10 @@ module.exports = {
         grayPrim: "#4D4D4D",
         blackPrim: "#000000",
       },
+      fontFamily: {
+        julius: ["Julius Sans One", "sans-serif"],
+        ubantu: ["Ubuntu", "sans-serif"],
+      },
     },
   },
   plugins: [],
