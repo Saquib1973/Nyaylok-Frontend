@@ -19,7 +19,7 @@ const Pagination = ({ count, perPage, pag }) => {
       ) : (
         <Link
           to={`/viewCases/${page - 1}`}
-          className="pagination-btn ml-2 flex items-center justify-center text-2xl text-gray-50/40 hover:text-gray-50/80"
+          className="pagination-btn ml-2 flex items-center justify-center text-2xl text-gray-50/40 bg-gray-600 px-2 rounded-md hover:text-gray-50/80"
         >
           <BsChevronDoubleLeft />
         </Link>
@@ -43,7 +43,7 @@ const Pagination = ({ count, perPage, pag }) => {
       ) : (
         <Link
           to={`/viewCases/${parseInt(page) + 1}`}
-          className="pagination-btn flex items-center justify-center text-2xl text-gray-50/40 hover:text-gray-50/80"
+          className="pagination-btn flex items-center justify-center text-2xl text-gray-50/40 bg-gray-600 px-2 rounded-md hover:text-gray-50/80"
         >
           <BsChevronDoubleRight />
         </Link>

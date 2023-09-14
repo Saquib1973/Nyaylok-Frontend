@@ -4,6 +4,7 @@ import backgroundImage from "../Utils/background2.jpg";
 import backgroundImage2 from "../Utils/background3.jpg";
 import { BsSearch } from "react-icons/bs";
 import Input from "../Components/Input";
+import DisplayCase from "./../Components/DisplayCase";
 // Count box component
 const CountBox = ({ count, name, index }) => {
   return (
@@ -28,6 +29,7 @@ const Home = () => {
     { name: "OnGoing", count: 250 },
     { name: "Registered", count: 590 },
   ]);
+  const [userCase, setUserCase] = useState(false);
   return (
     <Wrapper>
       {/* First Section of Home Page */}
@@ -69,10 +71,13 @@ const Home = () => {
         <div className="h-full py-[30vh] w-full sm:w-2/3 mx-auto relative">
           <div className="relative">
             <Input type={"text"} placeholder={"Search"} />
-            <BsSearch
-              className="absolute top-[20%] text-4xl right-5 cursor-pointer active:scale-75 duration-300 transition-all "
-              onClick={() => console.log("hello")}
-            />
+            {!userCase && (
+              <BsSearch
+                className="absolute top-[30%] sm:top-[20%] text-2xl sm:text-4xl right-5 cursor-pointer active:scale-75 duration-300 transition-all "
+                onClick={() => setUserCase(!userCase)}
+              />
+            )}
+            {userCase && <DisplayCase setUser={setUserCase} />}
           </div>
         </div>
       </div>
