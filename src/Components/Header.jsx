@@ -94,6 +94,7 @@ const Header = () => {
                 to={`login`}
                 className="hover:cursor-pointer"
                 onClick={() => {
+                  scrollToTop();
                   setUserState(!userState);
                 }}
               >
@@ -102,6 +103,7 @@ const Header = () => {
               <Link
                 to={`register`}
                 onClick={() => {
+                  scrollToTop();
                   setUserState(!userState);
                 }}
               >
@@ -128,6 +130,7 @@ const Header = () => {
                       className={`hover:text-redPrim transition-all text-center text-xs sm:text-base ${
                         mobilePress ? "block" : "hidden"
                       } sm:block `}
+                      onClick={() => scrollToTop()}
                     >
                       <p className="w-20 sm:w-28">{item.name}</p>
                     </Link>

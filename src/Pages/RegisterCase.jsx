@@ -37,11 +37,11 @@ const RegisterCase = () => {
           backgroundImage: `url(${backgroundImage})`,
         }}
       >
-        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-2/3 w-full mb-10 flex flex-col items-center justify-evenly">
+        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-[70%] w-full mb-10 flex flex-col items-center justify-evenly">
           <p className="heading">Register case</p>
           <div className="flex gap-8 flex-col w-full items-center">
-            <InputN name={"intrestin"} type={"text"} />
-            <InputN name={"dummy"} type={"text"} />
+            <InputN name={"Enter Victims Name"} type={"text"} />
+            <InputN name={"Enter FIR number"} type={"text"} />
             {/* Display selected flavors */}
             {selectedCases.length !== 0 && (
               <div className="flex text-xs sm:text-base md:text-xl  justify-center gap-4 w-2/3 items-center">
@@ -64,7 +64,7 @@ const RegisterCase = () => {
                 list="IPC"
                 id="IPC call"
                 name="IPC call"
-                placeholder="Select IPC"
+                placeholder="Select the IPC sections involved"
                 className="w-full rounded-2xl border-2 text-white px-8 py-2 bg-gray-200 bg-opacity-10 text-xs sm:text-base md:text-xl"
                 onChange={handleFlavorSelection}
               />
@@ -75,9 +75,9 @@ const RegisterCase = () => {
                 })}
               </datalist>
             </div>
-            <InputN type={"text"} name={"dummy2"} />
+            <InputN type={"text"} name={"Previous case reference (if any)"} />
           </div>
-          <Button />
+          <Button name={"Submit"} />
         </div>
       </div>
     </Wrapper>

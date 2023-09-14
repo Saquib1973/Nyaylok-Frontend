@@ -6,19 +6,20 @@ import Button from "../Components/Button";
 const Login = () => {
   return (
     <Wrapper>
-      <div className={`h-screen bg-cover bg-center flex items-center justify-center`}
+      <div
+        className={`h-screen bg-cover bg-center flex items-center justify-center`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
         }}
-        >
-      <div className="bg-gray-600 bg-opacity-50 rounded-xl h-2/3 w-full mb-10 flex flex-col items-center justify-evenly">
+      >
+        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-3/5 mx-5 text-xs md:text-xl w-full sm:w-2/3 mb-10 flex flex-col items-center justify-evenly">
           <p className="heading">Login</p>
           <div className="flex gap-8 flex-col w-full items-center">
             <InputN name={"Employee Id"} type={"text"} />
-            <InputN name= {"Password"} type={"text"} />
-            <Button name={"Login"}/>
-            </div>
-      </div>
+            <InputN name={"Password"} type={"text"} />
+            <Button name={"Login"} />
+          </div>
+        </div>
       </div>
     </Wrapper>
   );

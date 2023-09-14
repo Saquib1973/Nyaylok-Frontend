@@ -10,7 +10,7 @@ const Footer = () => {
           Made with 💖 by Hacktivators+
         </div>
         <div className="w-full flex items-center justify-around px-0 sm:px-5 md:px-20">
-          <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-12">
+          <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-12">
             <div className="w-full text-center sm:w-1/3">
               <p className="cursor-pointer">Ministry of Justice</p>
               <p className="cursor-pointer">MHRD</p>

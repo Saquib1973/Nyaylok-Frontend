@@ -50,7 +50,7 @@ const Home = () => {
       {/* Section 2 of Home Page to keep a count on the number of cases */}
       <div className="bg-black mt-16 h-screen py-20  px-10 flex flex-col gap-20 md:gap-40">
         <p className="heading">Milestones</p>
-        <div className="flex-col md:flex-row flex gap-12 flex-wrap justify-between w-full items-center">
+        <div className="flex-col md:flex-row flex gap-4 h-full sm:gap-12 flex-wrap justify-between w-full items-center">
           {countData.map((item, index) => {
             return (
               <div key={index}>
@@ -66,7 +66,7 @@ const Home = () => {
         style={{ backgroundImage: `url(${backgroundImage2})` }}
       >
         <p className="heading">Get Case Detail</p>
-        <div className="h-full py-64 w-full sm:w-2/3 mx-auto relative">
+        <div className="h-full py-[30vh] w-full sm:w-2/3 mx-auto relative">
           <div className="relative">
             <Input type={"text"} placeholder={"Search"} />
             <BsSearch

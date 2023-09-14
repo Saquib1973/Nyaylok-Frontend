@@ -2,7 +2,7 @@ import React from "react";
 
 const InputN = ({ name, type }) => {
   return (
-    <div className={`relative w-full px-20`}>
+    <div className={`relative w-full px-10 md:px-20`}>
       <input
         type={type}
         placeholder=""
@@ -11,7 +11,7 @@ const InputN = ({ name, type }) => {
       />
       <label
         htmlFor="inputField"
-        className="absolute ml-2 mt-3 peer-focus:ml-0 left-24 peer-focus:text-white  text-sm peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-8 peer-focus:text-xs peer-focus:font-bold -translate-y-8 duration-500 transition-all  text-white"
+        className="absolute ml-2 mt-3 peer-focus:ml-0 left-12 md:left-24 peer-focus:text-white  peer-placeholder-shown:translate-y-0 text-xs sm:text-base md:text-xl peer-focus:-translate-y-8 peer-focus:text-xs peer-focus:font-bold -translate-y-8 duration-500 transition-all  text-white"
       >
         {name}
       </label>
