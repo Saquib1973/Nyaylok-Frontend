@@ -1,8 +1,10 @@
 import React from "react";
 import Wrapper from "../Components/Wrapper";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { scrollToTop } from "../Components/Header";
+import Pagination from "../Components/Pagination";
 const ViewCases = () => {
+  const params = useParams();
   const navigate = useNavigate();
   const arr = [1, 2, 3, 4, 5, 6];
   return (
@@ -21,7 +23,7 @@ const ViewCases = () => {
               return (
                 <>
                   <div
-                    className="w-auto px-3  transition-all duration-500 py-5 flex gap-4 hover:bg-[#fe7e85]"
+                    className="w-auto px-3  transition-all duration-500 py-5 flex gap-4 hover:bg-[#fe7e85] cursor-pointer"
                     onClick={() => {
                       navigate(`/updateCase/${item}`);
                       scrollToTop();
@@ -38,6 +40,13 @@ const ViewCases = () => {
                 </>
               );
             })}
+          </div>
+          <div className="w-full items-center flex flex-col">
+            <Pagination
+              count={10}
+              perPage={2}
+              pag={params?.page ? params?.page : 1}
+            />
           </div>
         </div>
       </div>

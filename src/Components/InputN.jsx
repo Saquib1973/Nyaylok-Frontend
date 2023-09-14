@@ -11,7 +11,7 @@ const InputN = ({ name, type }) => {
       />
       <label
         htmlFor="inputField"
-        className="absolute ml-2 mt-3 peer-focus:ml-0 left-12 md:left-24 peer-focus:text-white  peer-placeholder-shown:translate-y-0 text-xs sm:text-base md:text-xl peer-focus:-translate-y-8 peer-focus:text-xs peer-focus:font-bold -translate-y-8 duration-500 transition-all  text-white"
+        className="absolute ml-2 mt-2 peer-focus:ml-0 left-12 md:left-24 peer-focus:text-white  peer-placeholder-shown:translate-y-0 text-xs sm:text-base md:text-xl peer-focus:-translate-y-8 peer-focus:text-xs peer-focus:font-bold -translate-y-9 duration-500 transition-all  text-white"
       >
         {name}
       </label>

@@ -1,7 +1,7 @@
 // Header data
 export const loggedIn = [
   { name: "Register Case", link: "registerCase" },
-  { name: "View Case", link: "viewCases" },
+  { name: "View Case", link: "viewCases/1" },
 ];
 // About Us Data
 export const aboutUsData = [
