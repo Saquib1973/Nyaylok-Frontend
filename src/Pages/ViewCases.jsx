@@ -23,9 +23,9 @@ const ViewCases = () => {
             <div className="w-[25%]">Date of Filling</div>
           </div>
           <div className="bg-gray-400 rounded-md h-full mx-2 sm:mx-6 w-auto bg-opacity-50">
-            {arr.map((item) => {
+            {arr.map((item, index) => {
               return (
-                <>
+                <div key={index}>
                   <div
                     className="w-auto px-3  transition-all duration-500 py-5 flex gap-4 hover:bg-[#fe7e85] cursor-pointer"
                     onClick={() => {
@@ -41,7 +41,7 @@ const ViewCases = () => {
                     </div>
                   </div>
                   <div className="h-2 bg-gray-300" />
-                </>
+                </div>
               );
             })}
           </div>

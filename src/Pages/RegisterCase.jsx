@@ -7,7 +7,7 @@ import Button from "../Components/Button";
 const RegisterCase = () => {
   const [selectedCases, setSelectedCase] = useState([]); // Initialize state for selected flavors
   const IPC = ["402", "320", "420", "295", "370"];
-  const handleFlavorSelection = (e) => {
+  const handleIpcSelection = (e) => {
     const selectedCase = e.target.value;
     for (var j = 0; j < selectedCases.length; j++) {
       if (selectedCase === selectedCases[j]) {
@@ -15,7 +15,6 @@ const RegisterCase = () => {
         return;
       }
     }
-    // Check if the selected flavor exists in the datalist
     const datalistOptions = document.getElementById("IPC").options;
     for (var i = 0; i < datalistOptions.length; i++) {
       if (datalistOptions[i].value === selectedCase) {
@@ -23,10 +22,33 @@ const RegisterCase = () => {
         e.target.value = null;
       }
     }
+    setUserInfo({ ...userInfo, ipc: selectedCases });
   };
 
   const removeCase = (cas) => {
     setSelectedCase((prevCas) => prevCas.filter((item) => item !== cas));
+  };
+  // Form Handler functions
+  const onChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
+  const [userInfo, setUserInfo] = useState({
+    victimName: "",
+    firNumber: "",
+    ipc: [],
+    prevCase: "",
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(userInfo);
+    setUserInfo({
+      victimName: "",
+      firNumber: "",
+      ipc: [],
+      prevCase: "",
+    });
+    setSelectedCase([]);
   };
 
   return (
@@ -40,8 +62,20 @@ const RegisterCase = () => {
         <div className="bg-gray-600 bg-opacity-50 rounded-xl h-[70%] w-full mb-10 flex flex-col items-center justify-evenly">
           <p className="heading">Register case</p>
           <div className="flex gap-8 flex-col w-full items-center">
-            <InputN name={"Enter Victims Name"} type={"text"} />
-            <InputN name={"Enter FIR number"} type={"text"} />
+            <InputN
+              name={"Enter Victims Name"}
+              type={"text"}
+              nam={"victimName"}
+              value={userInfo.victimName}
+              onChange={onChange}
+            />
+            <InputN
+              name={"Enter FIR number"}
+              type={"text"}
+              nam={"firNumber"}
+              value={userInfo.firNumber}
+              onChange={onChange}
+            />
             {/* Display selected flavors */}
             {selectedCases.length !== 0 && (
               <div className="flex text-xs sm:text-base md:text-xl  justify-center gap-4 w-2/3 items-center">
@@ -66,18 +100,24 @@ const RegisterCase = () => {
                 name="IPC call"
                 placeholder="Select the IPC sections involved"
                 className="w-full rounded-2xl border-2 text-white px-8 py-2 bg-gray-200 bg-opacity-10 text-xs sm:text-base md:text-xl"
-                onChange={handleFlavorSelection}
+                onChange={handleIpcSelection}
               />
 
               <datalist id="IPC">
-                {IPC.map((item) => {
-                  return <option value={item}></option>;
+                {IPC.map((item, index) => {
+                  return <option value={item} key={index}></option>;
                 })}
               </datalist>
             </div>
-            <InputN type={"text"} name={"Previous case reference (if any)"} />
+            <InputN
+              type={"text"}
+              name={"Previous case reference (if any)"}
+              nam={"prevCase"}
+              value={userInfo.prevCase}
+              onChange={onChange}
+            />
           </div>
-          <Button name={"Submit"} />
+          <Button name={"Submit"} handleSubmit={handleSubmit} />
         </div>
       </div>
     </Wrapper>

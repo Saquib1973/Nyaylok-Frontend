@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "../Components/Wrapper";
 import backgroundImage from "../Utils/background2.jpg";
 import InputN from "../Components/InputN";
 import Button from "../Components/Button";
 
 const Register = () => {
+  // Form handle functions
+  const onChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
+  const [userInfo, setUserInfo] = useState({
+    empId: "",
+    name: "",
+    emailId: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userInfo);
+    setUserInfo({
+      empId: "",
+      name: "",
+      emailId: "",
+      password: "",
+      confirmPassword: "",
+    });
+  };
   return (
     <Wrapper>
       <div
@@ -13,16 +35,46 @@ const Register = () => {
           backgroundImage: `url(${backgroundImage})`,
         }}
       >
-        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-[60%] md:h-[70%] w-4/5 sm:w-2/3 mb-4 md:mb-10 flex flex-col items-center justify-evenly">
+        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-[70%] md:h-[80%] w-4/5 sm:w-2/3 mb-4 md:mb-10 flex flex-col items-center justify-evenly">
           <p className="heading">Register</p>
-          <div className="flex gap-4 md:gap-6 flex-col w-full items-center">
-            <InputN name={"Employee Id"} type={"text"} />
-            <InputN name={"Name"} type={"text"} />
-            <InputN name={"E-mail Id"} type={"text"} />
-            <InputN name={"Password"} type={"password"} />
-            <InputN name={"Confirm Password"} type={"password"} />
-            <Button name={"Register"} />
-          </div>
+          <form className="flex gap-8 md:gap-8 flex-col w-full items-center">
+            <InputN
+              name={"Employee Id"}
+              type={"text"}
+              nam={"empId"}
+              value={userInfo.empId}
+              onChange={onChange}
+            />
+            <InputN
+              name={"Name"}
+              type={"text"}
+              nam={"name"}
+              value={userInfo.name}
+              onChange={onChange}
+            />
+            <InputN
+              name={"E-mail Id"}
+              type={"text"}
+              nam={"emailId"}
+              value={userInfo.emailId}
+              onChange={onChange}
+            />
+            <InputN
+              name={"Password"}
+              type={"password"}
+              nam={"password"}
+              value={userInfo.password}
+              onChange={onChange}
+            />
+            <InputN
+              name={"Confirm Password"}
+              type={"password"}
+              nam={"confirmPassword"}
+              value={userInfo.confirmPassword}
+              onChange={onChange}
+            />
+            <Button name={"Register"} handleSubmit={handleSubmit} />
+          </form>
         </div>
       </div>
     </Wrapper>
