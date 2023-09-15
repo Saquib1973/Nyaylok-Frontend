@@ -3,8 +3,14 @@ import Wrapper from "../Components/Wrapper";
 import backgroundImage from "../Utils/background2.jpg";
 import InputN from "../Components/InputN";
 import Button from "../Components/Button";
+import { useDispatch } from "react-redux";
+import { scrollToTop } from "../Components/Header";
+import { useNavigate } from "react-router-dom";
+import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
 
 const RegisterCase = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedCases, setSelectedCase] = useState([]); // Initialize state for selected flavors
   const IPC = ["402", "320", "420", "295", "370"];
   const handleIpcSelection = (e) => {
@@ -49,6 +55,12 @@ const RegisterCase = () => {
       prevCase: "",
     });
     setSelectedCase([]);
+    dispatch(setMessage({ message: "Case Registered", type: true }));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 2000);
+    scrollToTop();
+    navigate("/viewCases/1");
   };
 
   return (

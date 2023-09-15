@@ -14,9 +14,9 @@ const ViewCases = () => {
         className="min-h-screen flex justify-center items-center bg-center bg-cover"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        <div className="bg-gray-600 flex flex-col rounded-lg  bg-opacity-50 min-h-3/5 mx-2 mb-16 w-full sm:w-4/5 py-10  px-1 sm:px-8 gap-4 ">
+        <div className="bg-gray-600 flex flex-col rounded-lg text-xs sm:text-sm md:text-base lg:text-xl bg-opacity-50 min-h-3/5 mx-2 mb-16 w-full  py-10  px-1 sm:px-8 gap-4 ">
           <div className="heading w-full text-center py-2">View Cases</div>
-          <div className="w-auto mx-2 sm:mx-6 rounded-lg py-3 bg-opacity-80 flex  px-5 bg-white text-black">
+          <div className="w-auto mx-2 sm:mx-6 rounded-lg py-3 bg-opacity-80 flex  px-2 sm:px-5 bg-white text-black">
             <div className="w-[15%]">CaseId</div>
             <div className="w-[15%]">Status</div>
             <div className="w-[45%]">Sections</div>
@@ -27,7 +27,7 @@ const ViewCases = () => {
               return (
                 <div key={index}>
                   <div
-                    className="w-auto px-3  transition-all duration-500 py-5 flex gap-4 hover:bg-[#fe7e85] cursor-pointer"
+                    className="w-auto px-1 sm:px-3  transition-all duration-500 py-5 flex gap-1 sm:gap-4 hover:bg-[#fe7e85] cursor-pointer"
                     onClick={() => {
                       navigate(`/updateCase/${item}`);
                       scrollToTop();

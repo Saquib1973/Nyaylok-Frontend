@@ -3,7 +3,14 @@ import Wrapper from "../Components/Wrapper";
 import backgroundImage from "../Utils/background2.jpg";
 import InputN from "../Components/InputN";
 import Button from "../Components/Button";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setToken } from "../Redux/reducer/authReducer";
+import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
+import { scrollToTop } from "../Components/Header";
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // Form Handler functions
   const onChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -19,6 +26,14 @@ const Login = () => {
       empId: "",
       password: "",
     });
+    const token = "token";
+    dispatch(setToken(token));
+    dispatch(setMessage({ message: "Login Success", type: true }));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 2000);
+    scrollToTop();
+    navigate("/");
   };
   return (
     <Wrapper>

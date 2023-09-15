@@ -3,8 +3,14 @@ import Wrapper from "../Components/Wrapper";
 import backgroundImage from "../Utils/background2.jpg";
 import InputN from "../Components/InputN";
 import Button from "../Components/Button";
+import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
+import { scrollToTop } from "../Components/Header";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // Form handle functions
   const onChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -26,6 +32,12 @@ const Register = () => {
       password: "",
       confirmPassword: "",
     });
+    dispatch(setMessage({ message: "Registered", type: true }));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 2000);
+    scrollToTop();
+    navigate("/login");
   };
   return (
     <Wrapper>

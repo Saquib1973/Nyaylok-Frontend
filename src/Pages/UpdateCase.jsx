@@ -3,8 +3,14 @@ import Wrapper from "../Components/Wrapper";
 import backgroundImage from "../Utils/background2.jpg";
 import InputN from "../Components/InputN";
 import Button from "../Components/Button";
+import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
+import { scrollToTop } from "../Components/Header";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const UpdateCase = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedCases, setSelectedCase] = useState(["402", "320"]); // Initialize state for selected flavors
   const IPC = ["402", "320", "420", "295", "370"];
   const handleIpcSelection = (e) => {
@@ -49,6 +55,28 @@ const UpdateCase = () => {
       prevCase: "",
     });
     setSelectedCase([]);
+    dispatch(setMessage({ message: "Case Updated", type: true }));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 2000);
+    scrollToTop();
+    navigate("/viewCases/1");
+  };
+  const handleCompleted = (e) => {
+    e.preventDefault();
+    setUserInfo({
+      victimName: "",
+      firNumber: "",
+      ipc: [],
+      prevCase: "",
+    });
+    setSelectedCase([]);
+    dispatch(setMessage({ message: "Case Completed", type: true }));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 2000);
+    scrollToTop();
+    navigate("/viewCases/1");
   };
 
   return (
@@ -117,7 +145,10 @@ const UpdateCase = () => {
               onChange={onChange}
             />
           </div>
-          <Button name={"Submit"} handleSubmit={handleSubmit} />
+          <div className="flex gap-4">
+            <Button name={"Update"} handleSubmit={handleSubmit} />
+            <Button name={"Completed"} handleSubmit={handleCompleted} />
+          </div>
         </div>
       </div>
     </Wrapper>
