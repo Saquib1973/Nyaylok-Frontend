@@ -8,12 +8,13 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../Redux/reducer/authReducer";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
 import { scrollToTop } from "../Components/Header";
-import { useLoginMutation } from "../Redux/services/authService";
-import Cookies from "js-cookie";
+// import { useLoginMutation } from "../Redux/services/authService";
+import axios from "axios";
 // Login Component
 const Login = () => {
-  const [login, loginRes] = useLoginMutation();
+  // const [login, loginRes] = useLoginMutation();
   // Config
+  // eslint-disable-next-line
   const dispatch = useDispatch();
   // eslint-disable-next-line
   const navigate = useNavigate();
@@ -31,32 +32,36 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(userInfo);
-    await login(userInfo);
+    // await login(userInfo);
+    const res = await axios.post("http://localhost:1978/auth/login", userInfo);
+    console.log(res);
   };
-  useEffect(() => {
-    if (loginRes?.status === "fulfilled") {
-      setUserInfo({
-        empId: "",
-        password: "",
-      });
-      const token = Cookies.get();
-      console.log("token", token);
-      dispatch(setToken(token));
-      dispatch(setMessage({ message: "Login Success", type: true }));
-      setTimeout(() => {
-        dispatch(clearMessage());
-      }, 2000);
-      scrollToTop();
-      // navigate("/");
-    } else if (loginRes?.status === "rejected") {
-      dispatch(setMessage({ message: "Error", type: false }));
-      setTimeout(() => {
-        dispatch(clearMessage());
-      }, 2000);
-    }
-    // eslint-disable-next-line
-  }, [loginRes?.status]);
-  console.log(loginRes);
+
+  // useEffect(() => {
+  //   if (loginRes?.status === "fulfilled") {
+  //     setUserInfo({
+  //       empId: "",
+  //       password: "",
+  //     });
+  //     const token = "";
+  //     console.log(document.cookie);
+  //     console.log("userToken", token);
+  //     dispatch(setToken(token));
+  //     dispatch(setMessage({ message: "Login Success", type: true }));
+  //     setTimeout(() => {
+  //       dispatch(clearMessage());
+  //     }, 2000);
+  //     scrollToTop();
+  //     // navigate("/");
+  //   } else if (loginRes?.status === "rejected") {
+  //     dispatch(setMessage({ message: "Error", type: false }));
+  //     setTimeout(() => {
+  //       dispatch(clearMessage());
+  //     }, 2000);
+  //   }
+  //   // eslint-disable-next-line
+  // }, [loginRes?.status]);
+  // console.log(loginRes);
   return (
     <Wrapper>
       <div

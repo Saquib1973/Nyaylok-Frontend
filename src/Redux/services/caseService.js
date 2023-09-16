@@ -4,7 +4,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const caseService = createApi({
   reducerPath: "case",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://nyaylok-server.onrender.com/",
+    // baseUrl: "https://nyaylok-server.onrender.com/",
+    baseUrl: "http://localhost:1978/",
     headers: {
       "Content-Type": "application/json",
     },

@@ -4,7 +4,7 @@ const tokenLocalStorage = localStorage.getItem("userToken");
 
 // Verify Token Function
 const verifyToken = () => {
-  if (tokenLocalStorage !== null || tokenLocalStorage !== undefined) {
+  if (tokenLocalStorage) {
     return true;
   } else {
     return false;
