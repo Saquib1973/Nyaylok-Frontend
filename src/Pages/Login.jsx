@@ -7,9 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken } from "../Redux/reducer/authReducer";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
+import Cookies from "js-cookie";
 import { scrollToTop } from "../Components/Header";
-// import { useLoginMutation } from "../Redux/services/authService";
 import axios from "axios";
+axios.defaults.withCredentials = true;
+// import { useLoginMutation } from "../Redux/services/authService";
+
+
+
 // Login Component
 const Login = () => {
   // const [login, loginRes] = useLoginMutation();
@@ -33,9 +38,14 @@ const Login = () => {
     e.preventDefault();
     console.log(userInfo);
     // await login(userInfo);
-    const res = await axios.post("http://localhost:1978/auth/login", userInfo);
-    console.log(res);
+    const res = await axios.post("http://localhost:1978/auth/login", userInfo, { withCredentials: true });
+
+    // const nyayToken = Cookies.get("nyayToken");
+    // console.log(nyayToken);
+    console.log(res.data);
   };
+
+
 
   // useEffect(() => {
   //   if (loginRes?.status === "fulfilled") {
