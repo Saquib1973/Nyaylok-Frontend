@@ -1,5 +1,7 @@
 import React from "react";
 
+// Input Component with floating label
+
 const InputN = ({ name, type, value, nam, onChange }) => {
   return (
     <div className={`relative w-full px-10 md:px-20`}>

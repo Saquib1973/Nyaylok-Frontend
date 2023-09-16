@@ -8,17 +8,23 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../Redux/reducer/authReducer";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
 import { scrollToTop } from "../Components/Header";
+
+// Login Component
 const Login = () => {
+  // Config
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // Form Handler functions
-  const onChange = (e) => {
-    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
-  };
+
+  // States
   const [userInfo, setUserInfo] = useState({
     empId: "",
     password: "",
   });
+
+  // Form Handler functions
+  const onChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userInfo);
@@ -43,7 +49,7 @@ const Login = () => {
           backgroundImage: `url(${backgroundImage})`,
         }}
       >
-        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-3/5 mx-5 text-xs md:text-xl w-full sm:w-2/3 mb-10 flex flex-col items-center justify-evenly">
+        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-2/5 sm:h-3/5 mx-2 sm:mx-5 text-xs md:text-xl w-full sm:w-2/3 mb-10 flex flex-col items-center justify-evenly">
           <p className="heading">Login</p>
           <div className="flex gap-8 flex-col w-full items-center">
             <InputN

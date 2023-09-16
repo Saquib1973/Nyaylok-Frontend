@@ -1,5 +1,8 @@
 import React from "react";
+
 // Reusable Component needs placeholders , type
+// Search input component
+
 const Input = ({ placeholder, type }) => {
   return (
     <input

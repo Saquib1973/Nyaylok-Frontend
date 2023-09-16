@@ -8,11 +8,23 @@ import { scrollToTop } from "../Components/Header";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// Update Case
 const UpdateCase = () => {
+  // Config
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // States
   const [selectedCases, setSelectedCase] = useState(["402", "320"]); // Initialize state for selected flavors
   const IPC = ["402", "320", "420", "295", "370"];
+  const [userInfo, setUserInfo] = useState({
+    victimName: "",
+    firNumber: "",
+    ipc: [],
+    prevCase: "",
+  });
+
+  //  Functions
   const handleIpcSelection = (e) => {
     const selectedCase = e.target.value;
     for (var j = 0; j < selectedCases.length; j++) {
@@ -38,12 +50,8 @@ const UpdateCase = () => {
   const onChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
-  const [userInfo, setUserInfo] = useState({
-    victimName: "",
-    firNumber: "",
-    ipc: [],
-    prevCase: "",
-  });
+
+  // Form Update functions
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -62,6 +70,8 @@ const UpdateCase = () => {
     scrollToTop();
     navigate("/viewCases/1");
   };
+
+  // Case Completed handler
   const handleCompleted = (e) => {
     e.preventDefault();
     setUserInfo({
@@ -88,7 +98,7 @@ const UpdateCase = () => {
         }}
       >
         <div className="bg-gray-600 bg-opacity-50 rounded-xl h-[70%] w-full mb-10 flex flex-col items-center justify-evenly">
-          <p className="heading">Register case</p>
+          <p className="heading">#Loremipsumdolorsitamet</p>
           <div className="flex gap-8 flex-col w-full items-center">
             <InputN
               name={"Enter Victims Name"}

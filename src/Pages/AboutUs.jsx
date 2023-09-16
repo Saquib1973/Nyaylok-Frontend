@@ -9,6 +9,8 @@ import {
 import { Link } from "react-router-dom";
 import { aboutUsData } from "../Components/RenderData";
 
+// About User Interface Component
+
 export const UserCard = ({
   role = "",
   name = "",
@@ -57,8 +59,14 @@ export const UserCard = ({
   );
 };
 
+// About Us component
+
 const AboutUs = () => {
+  // useState
+
   const [count, setCount] = useState(0);
+
+  // Function
 
   const handleLeftClick = () => {
     if (count > 0) {

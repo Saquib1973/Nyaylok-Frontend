@@ -1,6 +1,9 @@
 import React from "react";
 import error from "../Utils/404.jpg";
 import { Link } from "react-router-dom";
+
+// Error page
+
 const Error = () => {
   return (
     <>

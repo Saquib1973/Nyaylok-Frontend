@@ -5,7 +5,12 @@ import backgroundImage2 from "../Utils/background3.jpg";
 import { BsSearch } from "react-icons/bs";
 import Input from "../Components/Input";
 import DisplayCase from "./../Components/DisplayCase";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
+
 // Count box component
+
 const CountBox = ({ count, name, index }) => {
   return (
     <div
@@ -21,7 +26,15 @@ const CountBox = ({ count, name, index }) => {
   );
 };
 
+// Home Component
+
 const Home = () => {
+  // Configs
+  const dispatch = useDispatch();
+  const { userToken } = useSelector((state) => state.authReducer);
+  // eslint-disable-next-line
+  const navigate = useNavigate();
+  // States
   // This data need to be fetched from the bacckend and displayed
   //eslint-disable-next-line
   const [countData, setCountData] = useState([
@@ -30,11 +43,20 @@ const Home = () => {
     { name: "Registered", count: 590 },
   ]);
   const [userCase, setUserCase] = useState(false);
+
+  // Function
+  const handleSearchCase = () => {
+    setUserCase(!userCase);
+    dispatch(setMessage({ message: "Found your case", type: true }));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 2000);
+  };
   return (
     <Wrapper>
       {/* First Section of Home Page */}
       <div
-        className="bg-cover text-xs sm:text-sm md:text-base lg:text-xl bg-no-repeat bg-center h-[85vh]  w-full flex items-center px-16 gap-4"
+        className="text-xs sm:text-sm md:text-base bg-fixed bg-origin-content sm:bg-auto lg:text-xl bg-no-repeat bg-center h-[85vh]  w-full flex items-center px-16 gap-4"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <div className="w-full md:w-2/3 lg:w-1/2 flex gap-4 flex-col">
@@ -63,24 +85,26 @@ const Home = () => {
         </div>
       </div>
       {/* Section 3 of Home Page to get common user a case's number */}
-      <div
-        className="py-20 h-screen pb-20 lg:pb-10 bg-no-repeat bg-opacity-5 bg-center bg-contain rounded-md px-10"
-        style={{ backgroundImage: `url(${backgroundImage2})` }}
-      >
-        <p className="heading">Get Case Detail</p>
-        <div className="h-full py-[30vh] w-full sm:w-2/3 mx-auto relative">
-          <div className="relative">
-            <Input type={"text"} placeholder={"Search"} />
-            {!userCase && (
-              <BsSearch
-                className="absolute top-[30%] sm:top-[20%] text-2xl sm:text-4xl right-5 cursor-pointer active:scale-75 duration-300 transition-all "
-                onClick={() => setUserCase(!userCase)}
-              />
-            )}
-            {userCase && <DisplayCase setUser={setUserCase} />}
+      {!userToken && (
+        <div
+          className="py-20 h-screen pb-20 lg:pb-10 bg-no-repeat bg-opacity-5 bg-center bg-contain rounded-md px-10"
+          style={{ backgroundImage: `url(${backgroundImage2})` }}
+        >
+          <p className="heading">Get Case Detail</p>
+          <div className="h-full py-[30vh] w-full sm:w-2/3 mx-auto relative">
+            <div className="relative">
+              <Input type={"text"} placeholder={"Search"} />
+              {!userCase && (
+                <BsSearch
+                  className="absolute top-[30%] sm:top-[20%] text-2xl sm:text-4xl right-5 cursor-pointer active:scale-75 duration-300 transition-all "
+                  onClick={handleSearchCase}
+                />
+              )}
+              {userCase && <DisplayCase setUser={setUserCase} />}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Wrapper>
   );
 };

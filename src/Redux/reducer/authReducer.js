@@ -1,6 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import jwtDecode from "jwt-decode";
 const tokenLocalStorage = localStorage.getItem("userToken");
+
+// Verify Token Function
+const verifyToken = () => {
+  if (tokenLocalStorage) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const authReducer = createSlice({
+  name: "authReducer",
+  initialState: {
+    userToken: verifyToken(),
+  },
+  reducers: {
+    // Function to set userToken with the given token in localStorage
+    setToken: (state, action) => {
+      localStorage.setItem("userToken", action.payload);
+      state.userToken = action.payload;
+    },
+    // Function to remove userToken from localStorage
+    logout: (state) => {
+      localStorage.removeItem("userToken");
+      state.userToken = null;
+    },
+  },
+});
+
+export const { setToken, logout } = authReducer.actions;
+export default authReducer.reducer;
+
 // //function to verify expired token
 // function verifyToken() {
 //   if (tokenLocalStorage) {
@@ -18,36 +50,3 @@ const tokenLocalStorage = localStorage.getItem("userToken");
 //     return null;
 //   }
 // }
-
-const verifyToken = () => {
-  if (tokenLocalStorage) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const authReducer = createSlice({
-  //name of the slice
-  name: "authReducer",
-  // initial state of the slice this is accessed by reducers in the name of state
-  initialState: {
-    userToken: verifyToken(),
-  },
-  //functions to update the initial state
-  // actions in the function , with that we can get the payload we receive from the frontend
-  reducers: {
-    setToken: (state, action) => {
-      localStorage.setItem("userToken", action.payload);
-      state.userToken = action.payload;
-    },
-    //logout function to delete JWT token from local storage
-    logout: (state) => {
-      localStorage.removeItem("userToken");
-      state.userToken = null;
-    },
-  },
-});
-
-export const { setToken, logout } = authReducer.actions;
-export default authReducer.reducer;

@@ -2,6 +2,8 @@ import React from "react";
 import Wrapper from "../Components/Wrapper";
 import { UserCard } from "./AboutUs";
 
+// UserInfo Page Component
+
 const UserInfo = () => {
   return (
     <Wrapper>

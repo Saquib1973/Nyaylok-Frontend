@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { scrollToTop } from "./Header";
+
 // Footer Component
+
 const Footer = () => {
   return (
     <div className="bg-blackPrim py-2">

@@ -5,6 +5,7 @@ import { scrollToTop } from "../Components/Header";
 import Pagination from "../Components/Pagination";
 import backgroundImage from "../Utils/background1.png";
 const ViewCases = () => {
+  // Config
   const params = useParams();
   const navigate = useNavigate();
   const arr = [1, 2, 3, 4, 5, 6];

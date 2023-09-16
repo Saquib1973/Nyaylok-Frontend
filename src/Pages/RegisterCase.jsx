@@ -8,11 +8,25 @@ import { scrollToTop } from "../Components/Header";
 import { useNavigate } from "react-router-dom";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
 
+// RegisterCase Component
 const RegisterCase = () => {
+  // Config
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // States
   const [selectedCases, setSelectedCase] = useState([]); // Initialize state for selected flavors
   const IPC = ["402", "320", "420", "295", "370"];
+  const [userInfo, setUserInfo] = useState({
+    victimName: "",
+    firNumber: "",
+    ipc: [],
+    prevCase: "",
+  });
+
+  // Functions
+
+  // Hanlde Ipc Selection
   const handleIpcSelection = (e) => {
     const selectedCase = e.target.value;
     for (var j = 0; j < selectedCases.length; j++) {
@@ -30,7 +44,7 @@ const RegisterCase = () => {
     }
     setUserInfo({ ...userInfo, ipc: selectedCases });
   };
-
+  // Handle Ipc Removal
   const removeCase = (cas) => {
     setSelectedCase((prevCas) => prevCas.filter((item) => item !== cas));
   };
@@ -38,16 +52,9 @@ const RegisterCase = () => {
   const onChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
-  const [userInfo, setUserInfo] = useState({
-    victimName: "",
-    firNumber: "",
-    ipc: [],
-    prevCase: "",
-  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(userInfo);
     setUserInfo({
       victimName: "",
       firNumber: "",

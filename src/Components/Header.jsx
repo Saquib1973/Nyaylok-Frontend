@@ -8,17 +8,26 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../Redux/reducer/authReducer";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
+
 //Scroll Top Function
+
 export const scrollToTop = () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
   });
 };
+
+// Header component
+
 const Header = () => {
+  // configs
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   // States
+
   const { userToken } = useSelector((state) => state.authReducer);
   const [registerd, setRegisterd] = useState(userToken);
 
@@ -30,7 +39,6 @@ const Header = () => {
     setUserState(false);
     //eslint-disable-next-line
   }, [userToken]);
-  // Scroll to top onclick fucntion
 
   // Useeffect to handle the scrollY , if anyything less than 80 then island will shrink
   useEffect(() => {
@@ -63,7 +71,20 @@ const Header = () => {
     clearTimeout(pressTimer);
   };
 
+  //Redux Calls
+
   const { message, type } = useSelector((state) => state.globalReducer);
+
+  // Functions
+  const logOut = () => {
+    scrollToTop();
+    dispatch(logout());
+    dispatch(setMessage({ message: "Logged Out", type: false }));
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 2000);
+    navigate("/login");
+  };
   return (
     <div className=" z-10 w-full flex justify-center py-8 bg-transparent opacity-95  fixed left-0 top-0 ">
       <div
@@ -113,20 +134,7 @@ const Header = () => {
                   >
                     User
                   </Link>
-                  <button
-                    onClick={() => {
-                      scrollToTop();
-                      dispatch(logout());
-                      dispatch(
-                        setMessage({ message: "Logged Out", type: false })
-                      );
-                      setTimeout(() => {
-                        dispatch(clearMessage());
-                      }, 2000);
-                      navigate("/login");
-                    }}
-                    className="hover:cursor-pointer"
-                  >
+                  <button onClick={logOut} className="hover:cursor-pointer">
                     Logout
                   </button>
                 </div>
@@ -208,8 +216,3 @@ const Header = () => {
 };
 
 export default Header;
-/*
-   {message && (
-          
-        )}
-*/

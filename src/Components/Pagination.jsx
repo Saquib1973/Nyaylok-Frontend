@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { BsChevronDoubleRight, BsChevronDoubleLeft } from "react-icons/bs";
 const Pagination = ({ count, perPage, pag }) => {
+  // Config
+
   const params = useParams();
   const page = parseInt(pag);
   const totalPage = Math.ceil(count / perPage);

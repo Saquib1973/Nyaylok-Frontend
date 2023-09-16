@@ -11,6 +11,8 @@ import Home from "./Pages/Home";
 import Footer from "./Components/Footer";
 import AboutUs from "./Pages/AboutUs";
 import UserInfo from "./Pages/UserInfo";
+import Private from "./Routes/Private";
+import Public from "./Routes/Public";
 
 function App() {
   return (
@@ -18,11 +20,47 @@ function App() {
       <Header />
       <Routes>
         <Route path={`/`} element={<Home />} />
-        <Route path={`/login`} element={<Login />} />
-        <Route path={`/register`} element={<Register />} />
-        <Route path={`/updateCase/:id`} element={<UpdateCase />} />
-        <Route path={`/registerCase`} element={<RegisterCase />} />
-        <Route path={`/viewCases/:page`} element={<ViewCases />} />
+
+        <Route
+          path={`/login`}
+          element={
+            <Public>
+              <Login />
+            </Public>
+          }
+        />
+        <Route
+          path={`/register`}
+          element={
+            <Public>
+              <Register />
+            </Public>
+          }
+        />
+        <Route
+          path={`/updateCase/:id`}
+          element={
+            <Private>
+              <UpdateCase />
+            </Private>
+          }
+        />
+        <Route
+          path={`/registerCase`}
+          element={
+            <Private>
+              <RegisterCase />
+            </Private>
+          }
+        />
+        <Route
+          path={`/viewCases/:page`}
+          element={
+            <Private>
+              <ViewCases />
+            </Private>
+          }
+        />
         <Route path={`/aboutUs`} element={<AboutUs />} />
         <Route path={`/user`} element={<UserInfo />} />
         <Route path={`/404`} element={<Error />} />

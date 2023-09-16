@@ -8,13 +8,13 @@ import { scrollToTop } from "../Components/Header";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// Register Component
 const Register = () => {
+  // Config
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // Form handle functions
-  const onChange = (e) => {
-    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
-  };
+
+  // States
   const [userInfo, setUserInfo] = useState({
     empId: "",
     name: "",
@@ -22,6 +22,12 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+  // Functions
+  // Form handle functions
+  const onChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userInfo);
@@ -47,7 +53,7 @@ const Register = () => {
           backgroundImage: `url(${backgroundImage})`,
         }}
       >
-        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-[70%] md:h-[80%] w-4/5 sm:w-2/3 mb-4 md:mb-10 flex flex-col items-center justify-evenly">
+        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-[70%] md:h-[80%] mx-0 sm:mx-5 w-4/5 sm:w-2/3 mb-4 md:mb-10 flex flex-col items-center justify-evenly">
           <p className="heading">Register</p>
           <form className="flex gap-8 md:gap-8 flex-col w-full items-center">
             <InputN
