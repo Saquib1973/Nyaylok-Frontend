@@ -53,9 +53,9 @@ const Register = () => {
           backgroundImage: `url(${backgroundImage})`,
         }}
       >
-        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-[70%] md:h-[80%] mx-0 sm:mx-5 w-4/5 sm:w-2/3 mb-4 md:mb-10 flex flex-col items-center justify-evenly">
+        <div className="bg-gray-600 bg-opacity-50 rounded-xl h-auto py-4 mx-0 sm:mx-5 w-4/5 sm:w-2/3 mb-4 md:mb-10 flex flex-col items-center justify-evenly">
           <p className="heading">Register</p>
-          <form className="flex gap-8 md:gap-8 flex-col w-full items-center">
+          <form className="flex gap-8 md:gap-8 flex-col w-full px-8 py-10">
             <InputN
               name={"Employee Id"}
               type={"text"}

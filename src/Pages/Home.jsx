@@ -56,7 +56,7 @@ const Home = () => {
     <Wrapper>
       {/* First Section of Home Page */}
       <div
-        className="text-xs sm:text-sm md:text-base bg-fixed bg-origin-content sm:bg-auto lg:text-xl bg-no-repeat bg-center h-[85vh]  w-full flex items-center px-16 gap-4"
+        className="text-xs sm:text-sm md:text-base bg-cover lg:text-xl bg-no-repeat bg-center h-[85vh]  w-full flex items-center px-16 gap-4"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <div className="w-full md:w-2/3 lg:w-1/2 flex gap-4 flex-col">
