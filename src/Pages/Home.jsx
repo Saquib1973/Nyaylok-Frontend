@@ -63,15 +63,15 @@ const Home = () => {
       dispatch(setMessage({ message: "Found your case", type: true }));
       setTimeout(() => {
         dispatch(clearMessage());
-      }, 2000);
+      }, 6000);
     } else if (particularCaseResponse?.status === "rejected") {
       dispatch(setMessage({ message: "Couldn't Find", type: false }));
       setTimeout(() => {
         dispatch(clearMessage());
-      }, 2000);
+      }, 6000);
     }
     //eslint-disable-next-line
-  }, [particularCaseResponse?.isLoading]);
+  }, [particularCaseResponse?.status]);
 
   return (
     <Wrapper>

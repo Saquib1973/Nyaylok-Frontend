@@ -1,9 +1,11 @@
 import React from "react";
 
-const Loader = ({ clr = "white" }) => {
+const Loader = ({ clr = "white", size = "sm" }) => {
   return (
     <div
-      className={`bg-transparent border-2 border-${clr} border-x-0 h-7 w-7 rounded-full animate-spin`}
+      className={`bg-transparent border-2 border-${clr} border-x-0 ${
+        size === "sm" ? "h-7 w-7" : "h-20 w-20"
+      } rounded-full animate-spin`}
     />
   );
 };

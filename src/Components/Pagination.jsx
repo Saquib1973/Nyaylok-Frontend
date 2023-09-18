@@ -14,14 +14,24 @@ const Pagination = ({ count, perPage, pag }) => {
   for (var i = startPage; i <= endPage; i++) {
     arr.push(i);
   }
+
+  /*
+   useEffect(() => {
+    // Disable scrolling when the modal is open
+    if (userCase) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+ */
   return (
-    <div className="flex gap-2  pt-2">
+    <div className="flex gap-1 sm:gap-2 pt-1 sm:pt-2 text-xs sm:text-xl">
       {page === 1 ? (
         <div className="ml-2"></div>
       ) : (
         <Link
           to={`/viewCases/${page - 1}`}
-          className="pagination-btn ml-2 flex items-center justify-center text-2xl text-gray-50/40 bg-gray-600 px-2 rounded-md hover:text-gray-50/80"
+          className="ml-0 sm:ml-2 flex items-center justify-center text-base sm:text-2xl text-gray-50/40 bg-gray-600 px-1 sm:px-2 rounded-md hover:text-gray-50/80"
         >
           <BsChevronDoubleLeft />
         </Link>
@@ -33,8 +43,8 @@ const Pagination = ({ count, perPage, pag }) => {
           to={`/viewCases/${item}`}
           className={`pagination-btn ${
             item === parseInt(params.page)
-              ? "px-4 py-2 bg-gray-300/80 border-2 border-white/80 rounded-md text-black font-bold"
-              : "px-4 py-2 "
+              ? "px-2 sm:px-4 py-1 sm:py-2 bg-gray-300/80 border-2 border-white/80 rounded-md text-black font-bold"
+              : "px-2 sm:px-4 py-1 sm:py-2 "
           }`}
         >
           {item}
@@ -45,7 +55,7 @@ const Pagination = ({ count, perPage, pag }) => {
       ) : (
         <Link
           to={`/viewCases/${parseInt(page) + 1}`}
-          className="pagination-btn flex items-center justify-center text-2xl text-gray-50/40 bg-gray-600 px-2 rounded-md hover:text-gray-50/80"
+          className="ml-0 sm:flex items-center justify-center text-base flex sm:text-2xl text-gray-50/40 bg-gray-600 px-1 sm:px-2 rounded-md hover:text-gray-50/80"
         >
           <BsChevronDoubleRight />
         </Link>

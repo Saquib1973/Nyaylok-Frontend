@@ -105,7 +105,7 @@ const RegisterCase = () => {
   }, [registerCaseResponse.status]);
   return (
     <Wrapper>
-      <div
+      <form
         className={`h-screen bg-cover bg-center flex items-center justify-center`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
@@ -210,7 +210,7 @@ const RegisterCase = () => {
             loading={registerCaseResponse?.isLoading}
           />
         </div>
-      </div>
+      </form>
     </Wrapper>
   );
 };

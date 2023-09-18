@@ -17,7 +17,7 @@ const InputN = ({ name, type, value, nam, onChange, width = "100%" }) => {
       />
       <label
         htmlFor={name}
-        className="md:text-lg text-xs sm:text-base absolute top-0 left-0 h-full px-3 py-5 text-gray-400 transition-all duration-100 ease-in-out origin-left transform scale-75 translate-x-1 -translate-y-5 opacity-75 pointer-events-none peer-placeholder-shown:opacity-100 peer-focus:opacity-75 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 peer-focus:underline peer-focus:-translate-y-5 peer-placeholder-shown:translate-x-0 peer-focus:translate-x-1"
+        className="md:text-lg text-sm sm:text-base absolute top-0 left-0 h-full px-3 py-5 text-gray-400 transition-all duration-100 ease-in-out origin-left transform scale-75 translate-x-1 -translate-y-5 opacity-75 pointer-events-none peer-placeholder-shown:opacity-100 peer-focus:opacity-75 peer-placeholder-shown:scale-100 peer-focus:scale-75 md:peer-focus:text-sm peer-placeholder-shown:translate-y-0 peer-focus:underline peer-focus:-translate-y-5 peer-placeholder-shown:translate-x-0 peer-focus:translate-x-1"
       >
         {name}
       </label>

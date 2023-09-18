@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const authService = createApi({
   reducerPath: "auth",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://nyaylok-server.onrender.com/auth/",
-    // baseUrl: "http://localhost:1978/auth/",
+    baseUrl: process.env.REACT_APP_BACKEND_URL,
+    // baseUrl: "http://localhost:1978/",
     prepareHeaders: (headers) => {
       // Include withCredentials: true in the request headers
       headers.withCredentials = true;
@@ -15,7 +15,7 @@ const authService = createApi({
       login: builder.mutation({
         query: (data) => {
           return {
-            url: "login",
+            url: "auth/login",
             method: "POST",
             body: data,
             credentials: "include",
