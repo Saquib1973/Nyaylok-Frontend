@@ -134,7 +134,10 @@ const Header = () => {
                   >
                     User
                   </Link>
-                  <button onClick={logOut} className="hover:cursor-pointer">
+                  <button
+                    onClick={logOut}
+                    className="hover:cursor-pointer hover:text-white hover:bg-gradient-to-r hover:from-redPrim hover:to-red-400 p-2 rounded-full px-4 transition-all duration-75"
+                  >
                     Logout
                   </button>
                 </div>

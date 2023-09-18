@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Wrapper from "./../Components/Wrapper";
 import backgroundImage from "../Utils/background2.jpg";
 import backgroundImage2 from "../Utils/background3.jpg";
 import { BsSearch } from "react-icons/bs";
-import Input from "../Components/Input";
 import DisplayCase from "./../Components/DisplayCase";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
+import {
+  useGetCaseCountQuery,
+  useLazyGetParticularCaseQuery,
+} from "../Redux/services/caseService";
+import Loader from "./../Components/Loader";
 
 // Count box component
 
-const CountBox = ({ count, name, index }) => {
+const CountBox = ({ count, name, index, loading }) => {
   return (
     <div
       className={`transition-all cursor-pointer hover:scale-105 hover:-translate-y-1 active:scale-95 duration-700 ${
@@ -20,8 +24,14 @@ const CountBox = ({ count, name, index }) => {
           : "text-white bg-redPrim hover:bg-white hover:text-redPrim"
       } h-32 md:h-48 w-32 md:w-48 rounded-2xl flex flex-col items-center justify-evenly px-10`}
     >
-      <p className="text-3xl md:text-6xl font-semibold">{count}</p>
-      <p>{name}</p>
+      {loading ? (
+        <Loader clr={index % 2 === 0 ? "redPrim" : "white"} />
+      ) : (
+        <>
+          <p className="text-3xl md:text-6xl font-semibold">{count}</p>
+          <p className="text-xs sm:text-sm">{name}</p>
+        </>
+      )}
     </div>
   );
 };
@@ -37,21 +47,32 @@ const Home = () => {
   // States
   // This data need to be fetched from the bacckend and displayed
   //eslint-disable-next-line
-  const [countData, setCountData] = useState([
-    { name: "Completed", count: 50 },
-    { name: "OnGoing", count: 250 },
-    { name: "Registered", count: 590 },
-  ]);
+  const dummy = [1, 2, 3];
   const [userCase, setUserCase] = useState(false);
-
+  const [particularCaseId, setParticularCaseId] = useState("");
+  const getCaseCount = useGetCaseCountQuery();
+  const [particularId, particularCaseResponse] =
+    useLazyGetParticularCaseQuery();
   // Function
-  const handleSearchCase = () => {
+  const handleSearchCase = async () => {
+    await particularId(particularCaseId);
     setUserCase(!userCase);
-    dispatch(setMessage({ message: "Found your case", type: true }));
-    setTimeout(() => {
-      dispatch(clearMessage());
-    }, 2000);
   };
+  useEffect(() => {
+    if (particularCaseResponse?.status === "fulfilled") {
+      dispatch(setMessage({ message: "Found your case", type: true }));
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 2000);
+    } else if (particularCaseResponse?.status === "rejected") {
+      dispatch(setMessage({ message: "Couldn't Find", type: false }));
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 2000);
+    }
+    //eslint-disable-next-line
+  }, [particularCaseResponse?.isLoading]);
+
   return (
     <Wrapper>
       {/* First Section of Home Page */}
@@ -75,13 +96,43 @@ const Home = () => {
       <div className="bg-black mt-16 h-screen py-20  px-10 flex flex-col gap-20 md:gap-40">
         <p className="heading">Milestones</p>
         <div className="flex-col md:flex-row flex gap-4 h-full sm:gap-12 flex-wrap justify-between w-full items-center">
-          {countData.map((item, index) => {
-            return (
-              <div key={index}>
-                <CountBox count={item.count} name={item.name} index={index} />
-              </div>
-            );
-          })}
+          {!getCaseCount?.data?.response ? (
+            <>
+              {/* Skeleton for cards */}
+              {dummy.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <CountBox
+                      count={item[Object.keys(item)[0]]}
+                      name={Object.keys(item)[0]}
+                      index={index}
+                      loading={
+                        getCaseCount?.isFetching &&
+                        getCaseCount?.isLoading &&
+                        !getCaseCount?.isSuccess
+                      }
+                    />
+                  </div>
+                );
+              })}
+            </>
+          ) : (
+            <>
+              {/* Cards for backend fetched data */}
+              {getCaseCount?.data?.response.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <CountBox
+                      count={item[Object.keys(item)[0]]}
+                      name={Object.keys(item)[0]}
+                      index={index}
+                      loading={getCaseCount?.isLoading}
+                    />
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
       {/* Section 3 of Home Page to get common user a case's number */}
@@ -93,14 +144,26 @@ const Home = () => {
           <p className="heading">Get Case Detail</p>
           <div className="h-full py-[30vh] w-full sm:w-2/3 mx-auto relative">
             <div className="relative">
-              <Input type={"text"} placeholder={"Search"} />
+              <input
+                type={"text"}
+                placeholder={"Search"}
+                className="bg-graySec placeholder:text-white outline-none rounded-2xl p-2 sm:p-3 bg-opacity-70 border-[1px] border-white px-12 w-full text-xl md:text-3xl placeholder:tracking-wider placeholder:pl-1"
+                onChange={(e) => setParticularCaseId(e.target.value)}
+              />
               {!userCase && (
                 <BsSearch
                   className="absolute top-[30%] sm:top-[20%] text-2xl sm:text-4xl right-5 cursor-pointer active:scale-75 duration-300 transition-all "
                   onClick={handleSearchCase}
                 />
               )}
-              {userCase && <DisplayCase setUser={setUserCase} />}
+              {userCase && (
+                <DisplayCase
+                  setUser={setUserCase}
+                  data={particularCaseResponse?.data}
+                  status={particularCaseResponse?.status}
+                  loading={particularCaseResponse?.isLoading}
+                />
+              )}
             </div>
           </div>
         </div>

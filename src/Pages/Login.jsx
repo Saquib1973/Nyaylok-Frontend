@@ -7,17 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken } from "../Redux/reducer/authReducer";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
-import Cookies from "js-cookie";
 import { scrollToTop } from "../Components/Header";
-import axios from "axios";
-axios.defaults.withCredentials = true;
-// import { useLoginMutation } from "../Redux/services/authService";
-
-
+import { useLoginMutation } from "../Redux/services/authService";
+// axios.defaults.withCredentials = true;
 
 // Login Component
 const Login = () => {
-  // const [login, loginRes] = useLoginMutation();
+  const [login, loginRes] = useLoginMutation();
   // Config
   // eslint-disable-next-line
   const dispatch = useDispatch();
@@ -36,42 +32,36 @@ const Login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userInfo);
-    // await login(userInfo);
-    const res = await axios.post("http://localhost:1978/auth/login", userInfo, { withCredentials: true });
-
-    // const nyayToken = Cookies.get("nyayToken");
-    // console.log(nyayToken);
-    console.log(res.data);
+    try {
+      // eslint-disable-next-line
+      await login(userInfo);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-
-
-  // useEffect(() => {
-  //   if (loginRes?.status === "fulfilled") {
-  //     setUserInfo({
-  //       empId: "",
-  //       password: "",
-  //     });
-  //     const token = "";
-  //     console.log(document.cookie);
-  //     console.log("userToken", token);
-  //     dispatch(setToken(token));
-  //     dispatch(setMessage({ message: "Login Success", type: true }));
-  //     setTimeout(() => {
-  //       dispatch(clearMessage());
-  //     }, 2000);
-  //     scrollToTop();
-  //     // navigate("/");
-  //   } else if (loginRes?.status === "rejected") {
-  //     dispatch(setMessage({ message: "Error", type: false }));
-  //     setTimeout(() => {
-  //       dispatch(clearMessage());
-  //     }, 2000);
-  //   }
-  //   // eslint-disable-next-line
-  // }, [loginRes?.status]);
-  // console.log(loginRes);
+  useEffect(() => {
+    if (loginRes?.status === "fulfilled") {
+      setUserInfo({
+        empId: "",
+        password: "",
+      });
+      const token = loginRes?.data?.value;
+      dispatch(setToken(token));
+      dispatch(setMessage({ message: "Login Success", type: true }));
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 2000);
+      scrollToTop();
+      // navigate("/");
+    } else if (loginRes?.status === "rejected") {
+      dispatch(setMessage({ message: "Error", type: false }));
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 2000);
+    }
+    // eslint-disable-next-line
+  }, [loginRes?.status]);
   return (
     <Wrapper>
       <div
@@ -97,7 +87,11 @@ const Login = () => {
               value={userInfo.password}
               onChange={onChange}
             />
-            <Button name={"Login"} handleSubmit={handleSubmit} />
+            <Button
+              name={"Login"}
+              loading={loginRes?.isLoading}
+              handleSubmit={handleSubmit}
+            />
           </div>
         </div>
       </div>

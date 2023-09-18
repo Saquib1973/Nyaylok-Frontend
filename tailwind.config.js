@@ -9,6 +9,7 @@ module.exports = {
         redPrim: "#b22e3d",
         grayPrim: "#4D4D4D",
         blackPrim: "#000000",
+        graySec: "#64615E",
       },
       fontFamily: {
         julius: ["Julius Sans One", "sans-serif"],
