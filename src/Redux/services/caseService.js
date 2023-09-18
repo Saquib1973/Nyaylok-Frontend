@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const caseService = createApi({
   reducerPath: "case",
   baseQuery: fetchBaseQuery({
-    // baseUrl: process.env.REACT_APP_BACKEND_URL,
-    baseUrl: "http://localhost:1978/",
+    baseUrl: process.env.REACT_APP_BACKEND_URL,
+    // baseUrl: "http://localhost:1978/",
     headers: {
       "Content-Type": "application/json",
     },
