@@ -18,6 +18,7 @@ const authService = createApi({
             url: "auth/login",
             method: "POST",
             body: data,
+            withCredentials:true,
             credentials: "include",
             headers: {
               "Content-Type": "application/json",
