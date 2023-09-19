@@ -68,7 +68,7 @@ const ViewCases = () => {
                   return (
                     <div key={index}>
                       <div
-                        className="w-auto px-1 sm:px-3  transition-all duration-500 py-5 flex gap-1 sm:gap-4 hover:bg-[#fe7e85] cursor-pointer"
+                        className="w-auto px-1 sm:px-3  group transition-all duration-500 py-5 flex gap-1 sm:gap-4 hover:bg-[#ff8d93] cursor-pointer"
                         onClick={() => {
                           navigate(`/updateCase/${item}`);
                           scrollToTop();
@@ -85,7 +85,7 @@ const ViewCases = () => {
                             return (
                               <p
                                 key={indx}
-                                className="bg-red-400 rounded-md text-xs p-1 sm:p-2"
+                                className="bg-red-400 rounded-md text-xs p-1 sm:p-2 group-hover:scale-90 group-hover:bg-red-500 transition-all duration-1000"
                               >
                                 {i}
                               </p>
@@ -93,7 +93,10 @@ const ViewCases = () => {
                           })}
                         </div>
                         <div className="w-[20%] overflow-x-auto">
-                          {item.DOR.split("T")[0]}
+                          {item.DOR.split("T")[0]
+                            .split("-")
+                            .reverse()
+                            .join("/")}
                         </div>
                       </div>
                       <div className="h-2 bg-gray-300" />

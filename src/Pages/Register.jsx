@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Wrapper from "../Components/Wrapper";
 import backgroundImage from "../Utils/background2.jpg";
 import InputN from "../Components/InputN";
@@ -7,10 +7,13 @@ import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
 import { scrollToTop } from "../Components/Header";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useRegisterMutation } from "../Redux/services/authService";
 
 // Register Component
 const Register = () => {
   // Config
+  // eslint-disable-next-line
+  const [register, registerResponse] = useRegisterMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,7 +21,7 @@ const Register = () => {
   const [userInfo, setUserInfo] = useState({
     empId: "",
     name: "",
-    emailId: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
@@ -27,24 +30,33 @@ const Register = () => {
   const onChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userInfo);
-    setUserInfo({
-      empId: "",
-      name: "",
-      emailId: "",
-      password: "",
-      confirmPassword: "",
-    });
-    dispatch(setMessage({ message: "Registered", type: true }));
-    setTimeout(() => {
-      dispatch(clearMessage());
-    }, 2000);
-    scrollToTop();
-    navigate("/login");
+    register(userInfo);
   };
+  useEffect(() => {
+    if (registerResponse?.status === "fulfilled") {
+      setUserInfo({
+        empId: "",
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+      dispatch(setMessage({ message: "Login Success", type: true }));
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 2000);
+      scrollToTop();
+      navigate("/login");
+    } else if (registerResponse?.status === "rejected") {
+      dispatch(setMessage({ message: "Error", type: false }));
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 2000);
+    }
+    // eslint-disable-next-line
+  }, [registerResponse?.status]);
   return (
     <Wrapper>
       <div
@@ -72,9 +84,9 @@ const Register = () => {
             />
             <InputN
               name={"E-mail Id"}
-              type={"text"}
-              nam={"emailId"}
-              value={userInfo.emailId}
+              type={"email"}
+              nam={"email"}
+              value={userInfo.email}
               onChange={onChange}
             />
             <InputN
