@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Wrapper from "../Components/Wrapper";
 import { useNavigate, useParams } from "react-router-dom";
 import { scrollToTop } from "../Components/Header";
 import Pagination from "../Components/Pagination";
 import backgroundImage from "../Utils/background1.png";
-import { useLazyGetCasesQuery } from "../Redux/services/caseService";
+import {
+  useGetCaseCountQuery,
+  useLazyGetCasesQuery,
+} from "../Redux/services/caseService";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 const ViewCases = () => {
@@ -12,11 +15,24 @@ const ViewCases = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [getCase, caseResponse] = useLazyGetCasesQuery();
+  const caseCount = useGetCaseCountQuery();
   useEffect(() => {
     getCase(params.page);
     // eslint-disable-next-line
   }, [params.page]);
-  console.log(caseResponse);
+  const [countTotalCases, setCountTotalCases] = useState(null);
+  useEffect(() => {
+    setCountTotalCases(countCases());
+    // eslint-disable-next-line
+  }, [caseCount?.data?.response]);
+
+  function countCases() {
+    var count = 0;
+    for (var i = 0; i < caseCount?.data?.response.length; i += 1) {
+      count += Number(Object.values(caseCount?.data?.response[i]));
+    }
+    return count;
+  }
   return (
     <Wrapper>
       <div
@@ -89,7 +105,7 @@ const ViewCases = () => {
           </div>
           <div className="md:w-full items-center flex flex-col">
             <Pagination
-              count={69}
+              count={countTotalCases}
               perPage={6}
               pag={params?.page ? params?.page : 1}
             />

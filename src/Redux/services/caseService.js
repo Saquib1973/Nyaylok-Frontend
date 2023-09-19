@@ -3,7 +3,6 @@ const caseService = createApi({
   reducerPath: "case",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BACKEND_URL,
-    // baseUrl: "http://localhost:1978/",
     headers: {
       "Content-Type": "application/json",
     },
@@ -22,6 +21,7 @@ const caseService = createApi({
             url: "cases/registerCase",
             method: "POST",
             body: data,
+            withCredentials: true,
             credentials: "include",
           };
         },
@@ -31,6 +31,8 @@ const caseService = createApi({
           return {
             url: "cases/caseCounts",
             method: "GET",
+            withCredentials: true,
+            credentials: "include",
           };
         },
       }),
@@ -39,6 +41,8 @@ const caseService = createApi({
           return {
             url: `cases/findCaseById/${id}`,
             method: "GET",
+            withCredentials: true,
+            credentials: "include",
           };
         },
       }),
@@ -47,6 +51,8 @@ const caseService = createApi({
           return {
             url: `cases/IncompleteCasesPaginated/?page=${page}&pageLimit=6`,
             method: "GET",
+            withCredentials: true,
+            credentials: "include",
           };
         },
       }),
