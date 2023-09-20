@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { BsChevronDoubleRight, BsChevronDoubleLeft } from "react-icons/bs";
+import { scrollToTop } from "./Header";
 const Pagination = ({ count, perPage, pag }) => {
   // Config
 
@@ -32,6 +33,7 @@ const Pagination = ({ count, perPage, pag }) => {
         <Link
           to={`/viewCases/${page - 1}`}
           className="ml-0 sm:ml-2 flex items-center justify-center text-base sm:text-2xl text-gray-50/40 bg-gray-600 px-1 sm:px-2 rounded-md hover:text-gray-50/80"
+          onClick={() => scrollToTop()}
         >
           <BsChevronDoubleLeft />
         </Link>
@@ -41,6 +43,7 @@ const Pagination = ({ count, perPage, pag }) => {
         <Link
           key={index}
           to={`/viewCases/${item}`}
+          onClick={() => scrollToTop()}
           className={`pagination-btn ${
             item === parseInt(params.page)
               ? "px-2 sm:px-4 py-1 sm:py-2 bg-gray-300/80 border-2 border-white/80 rounded-md text-black font-bold"
@@ -55,6 +58,7 @@ const Pagination = ({ count, perPage, pag }) => {
       ) : (
         <Link
           to={`/viewCases/${parseInt(page) + 1}`}
+          onClick={() => scrollToTop()}
           className="ml-0 sm:flex items-center justify-center text-base flex sm:text-2xl text-gray-50/40 bg-gray-600 px-1 sm:px-2 rounded-md hover:text-gray-50/80"
         >
           <BsChevronDoubleRight />

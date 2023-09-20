@@ -14,7 +14,7 @@ const ipcService = createApi({
       ipc: builder.query({
         query: () => {
           return {
-            url: "IPC/getIPCsNumber",
+            url: process.env.REACT_APP_GET_IPC,
             method: "GET",
             headers: {
               "Content-Type": "application/json",

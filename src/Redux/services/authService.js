@@ -15,7 +15,7 @@ const authService = createApi({
       login: builder.mutation({
         query: (data) => {
           return {
-            url: "auth/login",
+            url: process.env.REACT_APP_LOGIN,
             method: "POST",
             body: data,
             withCredentials: true,
@@ -29,7 +29,7 @@ const authService = createApi({
       register: builder.mutation({
         query: (data) => {
           return {
-            url: "auth/register",
+            url: process.env.REACT_APP_REGISTER,
             method: "POST",
             body: data,
           };

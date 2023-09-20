@@ -17,7 +17,7 @@ const caseService = createApi({
       registerCase: builder.mutation({
         query: (data) => {
           return {
-            url: "cases/registerCase",
+            url: process.env.REACT_APP_REGISTER_CASE,
             method: "POST",
             body: data,
             withCredentials: true,
@@ -36,7 +36,7 @@ const caseService = createApi({
       getParticularCase: builder.query({
         query: (id) => {
           return {
-            url: `cases/findCaseById/${id}`,
+            url: `${process.env.REACT_APP_GET_SINGLE_CASE}/${id}`,
             method: "GET",
             withCredentials: true,
             credentials: "include",
@@ -46,7 +46,7 @@ const caseService = createApi({
       getCases: builder.query({
         query: (page) => {
           return {
-            url: `cases/IncompleteCasesPaginated/?page=${page}&pageLimit=6`,
+            url: `${process.env.REACT_APP_GET_CASES}/?page=${page}&pageLimit=6`,
             method: "GET",
             withCredentials: true,
             credentials: "include",
