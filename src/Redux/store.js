@@ -3,6 +3,7 @@ import globalReducer from "./reducer/globalReducer";
 import authReducer from "./reducer/authReducer";
 import caseService from "./services/caseService";
 import authService from "./services/authService";
+import ipcService from "./services/ipcService";
 
 // Redux Store
 const Store = configureStore({
@@ -11,10 +12,12 @@ const Store = configureStore({
     authReducer: authReducer,
     [caseService.reducerPath]: caseService.reducer,
     [authService.reducerPath]: authService.reducer,
+    [ipcService.reducerPath]: ipcService.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(caseService.middleware)
-      .concat(authService.middleware),
+      .concat(authService.middleware)
+      .concat(ipcService.middleware),
 });
 export default Store;

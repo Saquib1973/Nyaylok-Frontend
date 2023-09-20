@@ -10,11 +10,13 @@ import {
 } from "../Redux/services/caseService";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Loader from "../Components/Loader";
 const ViewCases = () => {
   // Config
   const params = useParams();
   const navigate = useNavigate();
   const [getCase, caseResponse] = useLazyGetCasesQuery();
+
   const caseCount = useGetCaseCountQuery();
   useEffect(() => {
     getCase(params.page);
@@ -70,7 +72,7 @@ const ViewCases = () => {
                       <div
                         className="w-auto px-1 sm:px-3  group transition-all duration-500 py-5 flex gap-1 sm:gap-4 hover:bg-[#ff8d93] cursor-pointer"
                         onClick={() => {
-                          navigate(`/updateCase/${item}`);
+                          navigate(`/updateCase/${item.caseId}`);
                           scrollToTop();
                         }}
                       >
@@ -107,11 +109,17 @@ const ViewCases = () => {
             )}
           </div>
           <div className="md:w-full items-center flex flex-col">
-            <Pagination
-              count={countTotalCases}
-              perPage={6}
-              pag={params?.page ? params?.page : 1}
-            />
+            {caseCount?.isFetching ? (
+              <div className="bg-gradient-to-r from-red-300 to-redPrim animate-spin rounded-full p-4">
+                <Loader />
+              </div>
+            ) : (
+              <Pagination
+                count={countTotalCases}
+                perPage={6}
+                pag={params?.page ? params?.page : 1}
+              />
+            )}
           </div>
         </div>
       </div>

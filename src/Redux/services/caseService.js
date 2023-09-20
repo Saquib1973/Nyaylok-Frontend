@@ -16,7 +16,6 @@ const caseService = createApi({
     return {
       registerCase: builder.mutation({
         query: (data) => {
-          console.log("Data", data);
           return {
             url: "cases/registerCase",
             method: "POST",
@@ -31,8 +30,6 @@ const caseService = createApi({
           return {
             url: "cases/caseCounts",
             method: "GET",
-            withCredentials: true,
-            credentials: "include",
           };
         },
       }),

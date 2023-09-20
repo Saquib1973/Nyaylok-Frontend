@@ -83,7 +83,7 @@ const Login = () => {
             <InputN
               name={"Password"}
               nam={"password"}
-              type={"text"}
+              type={"password"}
               value={userInfo.password}
               onChange={onChange}
             />
