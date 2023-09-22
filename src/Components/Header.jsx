@@ -73,6 +73,7 @@ const Header = () => {
   };
 
   //Redux Calls
+  // eslint-disable-next-line
   const [logoutInp, logoutRes] = useLazyLogoutQuery();
   const { message, type } = useSelector((state) => state.globalReducer);
   // Functions
@@ -85,7 +86,6 @@ const Header = () => {
     }, 2000);
     navigate("/login");
     logoutInp();
-    console.log(logoutRes);
   };
   return (
     <div className=" z-10 w-full flex justify-center py-8 bg-transparent opacity-95  fixed left-0 top-0 ">
@@ -103,7 +103,7 @@ const Header = () => {
                       }]`
                   : ` w-[40%] lg:w-[15%]`
               }`
-            : "w-auto transition-all duration-1000"
+            : "w-auto "
         } 
         transition-all`}
         onMouseDown={startPress}
