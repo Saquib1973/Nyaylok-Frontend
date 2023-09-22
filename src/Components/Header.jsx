@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../Redux/reducer/authReducer";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
+import { useLazyLogoutQuery } from "../Redux/services/authService";
 
 //Scroll Top Function
 
@@ -72,9 +73,8 @@ const Header = () => {
   };
 
   //Redux Calls
-
+  const [logoutInp, logoutRes] = useLazyLogoutQuery();
   const { message, type } = useSelector((state) => state.globalReducer);
-
   // Functions
   const logOut = () => {
     scrollToTop();
@@ -84,6 +84,8 @@ const Header = () => {
       dispatch(clearMessage());
     }, 2000);
     navigate("/login");
+    logoutInp();
+    console.log(logoutRes);
   };
   return (
     <div className=" z-10 w-full flex justify-center py-8 bg-transparent opacity-95  fixed left-0 top-0 ">
@@ -91,12 +93,19 @@ const Header = () => {
         className={`active:scale-95 delay-75 flex justify-around items-center bg-white text-black px-1  sm:py-4 rounded-full ${
           mobilePress ? "h-16" : "h-14"
         } sm:h-16 shadow-inner border-4 border-transparent hover:border-redPrim transition-all  duration-300 ${
-          registerd
-            ? userState
-              ? `w-[50%] lg:w-[30%]`
-              : `w-[${scroll ? `40%` : `50%`}] lg:w-[${scroll ? `15%` : `30%`}]`
-            : ` w-[40%] lg:w-[15%]`
-        } transition-all`}
+          message === ""
+            ? `${
+                registerd
+                  ? userState
+                    ? `w-[50%] lg:w-[30%]`
+                    : `w-[${scroll ? `40%` : `50%`}] lg:w-[${
+                        scroll ? `15%` : `30%`
+                      }]`
+                  : ` w-[40%] lg:w-[15%]`
+              }`
+            : "w-auto transition-all duration-1000"
+        } 
+        transition-all`}
         onMouseDown={startPress}
         onMouseUp={endPress}
         onMouseLeave={endPress}

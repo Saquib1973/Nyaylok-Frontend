@@ -11,7 +11,7 @@ const InputN = ({ name, type, value, nam, onChange, width = "100%" }) => {
         onChange={onChange}
         type={type}
         id={name}
-        className="w-full h-16 p-3 py-0 sm:p-3 pt-4 placeholder-transparent rounded-md peer border-none text-white bg-gray-200 bg-opacity-10 outline-none text-xs sm:text-base "
+        className="w-full h-14 md:h-16 p-3 py-0 sm:p-3 pt-4 placeholder-transparent rounded-md peer border-none text-white bg-gray-200 bg-opacity-10 outline-none text-xs sm:text-base "
         placeholder=""
         autoComplete="off"
       />

@@ -5,7 +5,6 @@ import backgroundImage2 from "../Utils/background3.jpg";
 import { BsSearch } from "react-icons/bs";
 import DisplayCase from "./../Components/DisplayCase";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { clearMessage, setMessage } from "../Redux/reducer/globalReducer";
 import {
   useGetCaseCountQuery,
@@ -13,41 +12,14 @@ import {
 } from "../Redux/services/caseService";
 import Loader from "./../Components/Loader";
 
-// Count box component
-
-const CountBox = ({ count, name, index, loading }) => {
-  return (
-    <div
-      className={`transition-all cursor-pointer hover:scale-105 hover:-translate-y-1 active:scale-95 duration-700 ${
-        index % 2 === 0
-          ? "bg-white text-black hover:text-redPrim hover:bg-white"
-          : "text-white bg-redPrim hover:bg-white hover:text-redPrim"
-      } h-32 md:h-48 w-32 md:w-48 rounded-2xl flex flex-col items-center justify-evenly px-10`}
-    >
-      {loading ? (
-        <Loader clr={index % 2 === 0 ? "redPrim" : "white"} />
-      ) : (
-        <>
-          <p className="text-3xl md:text-6xl font-semibold">{count}</p>
-          <p className="text-xs sm:text-sm">{name}</p>
-        </>
-      )}
-    </div>
-  );
-};
-
 // Home Component
-
 const Home = () => {
   // Configs
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.authReducer);
-  // eslint-disable-next-line
-  const navigate = useNavigate();
   // States
   // This data need to be fetched from the bacckend and displayed
-  //eslint-disable-next-line
-  const dummy = [1, 2, 3];
+  const dummy = ["Not Found", "Not Found", "Not Found"];
   const [userCase, setUserCase] = useState(false);
   const [particularCaseId, setParticularCaseId] = useState("");
   const getCaseCount = useGetCaseCountQuery();
@@ -60,19 +32,28 @@ const Home = () => {
   };
   useEffect(() => {
     if (particularCaseResponse?.status === "fulfilled") {
-      dispatch(setMessage({ message: "Found your case", type: true }));
+      dispatch(
+        setMessage({
+          message: particularCaseResponse?.data?.message,
+          type: true,
+        })
+      );
       setTimeout(() => {
         dispatch(clearMessage());
-      }, 6000);
+      }, 2500);
     } else if (particularCaseResponse?.status === "rejected") {
-      dispatch(setMessage({ message: "Couldn't Find", type: false }));
+      dispatch(
+        setMessage({
+          message: particularCaseResponse?.error?.data?.message,
+          type: false,
+        })
+      );
       setTimeout(() => {
         dispatch(clearMessage());
-      }, 6000);
+      }, 3000);
     }
     //eslint-disable-next-line
   }, [particularCaseResponse?.status]);
-
   return (
     <Wrapper>
       {/* First Section of Home Page */}
@@ -103,8 +84,7 @@ const Home = () => {
                 return (
                   <div key={index}>
                     <CountBox
-                      count={item[Object.keys(item)[0]]}
-                      name={Object.keys(item)[0]}
+                      name={item}
                       index={index}
                       loading={
                         getCaseCount?.isFetching &&
@@ -145,10 +125,12 @@ const Home = () => {
           <div className="h-full py-[30vh] w-full sm:w-2/3 mx-auto relative">
             <div className="relative">
               <input
+                disabled={particularCaseResponse?.status === "pending"}
                 type={"text"}
                 placeholder={"Search"}
                 className="bg-graySec placeholder:text-white outline-none rounded-2xl p-2 sm:p-3 bg-opacity-70 border-[1px] border-white px-12 w-full text-xl md:text-3xl placeholder:tracking-wider placeholder:pl-1"
                 onChange={(e) => setParticularCaseId(e.target.value)}
+                onClick={() => setUserCase(false)}
               />
               {!userCase && (
                 <BsSearch
@@ -173,3 +155,26 @@ const Home = () => {
 };
 
 export default Home;
+
+// Count box component
+
+const CountBox = ({ count, name, index, loading }) => {
+  return (
+    <div
+      className={`transition-all cursor-pointer hover:scale-105 hover:-translate-y-1 active:scale-95 duration-700 ${
+        index % 2 === 0
+          ? "bg-white text-black hover:text-redPrim hover:bg-white"
+          : "text-white bg-redPrim hover:bg-white hover:text-redPrim"
+      } h-32 md:h-48 w-32 md:w-48 rounded-2xl flex flex-col items-center justify-evenly px-10`}
+    >
+      {loading ? (
+        <Loader clr={index % 2 === 0 ? "redPrim" : "white"} />
+      ) : (
+        <>
+          <p className="text-3xl md:text-6xl font-semibold">{count}</p>
+          <p className="text-xs sm:text-sm">{name}</p>
+        </>
+      )}
+    </div>
+  );
+};

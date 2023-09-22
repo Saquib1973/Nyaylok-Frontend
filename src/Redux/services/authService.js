@@ -5,7 +5,6 @@ const authService = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BACKEND_URL,
     prepareHeaders: (headers) => {
-      // Include withCredentials: true in the request headers
       headers.withCredentials = true;
       return headers;
     },
@@ -35,9 +34,20 @@ const authService = createApi({
           };
         },
       }),
+      logout: builder.query({
+        query: () => {
+          return {
+            url: process.env.REACT_APP_LOGOUT,
+            method: "GET",
+            withCredentials: true,
+            credentials: "include",
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useLoginMutation, useRegisterMutation } = authService;
+export const { useLoginMutation, useRegisterMutation, useLazyLogoutQuery } =
+  authService;
 export default authService;

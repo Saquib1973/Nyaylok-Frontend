@@ -7,7 +7,6 @@ const caseService = createApi({
       "Content-Type": "application/json",
     },
     prepareHeaders: (headers) => {
-      // Include withCredentials: true in the request headers
       headers.withCredentials = true;
       return headers;
     },
@@ -28,7 +27,7 @@ const caseService = createApi({
       getCaseCount: builder.query({
         query: () => {
           return {
-            url: "cases/caseCounts",
+            url: process.env.REACT_APP_CASE_COUNT,
             method: "GET",
           };
         },

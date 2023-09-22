@@ -48,17 +48,19 @@ const Login = () => {
       });
       const token = loginRes?.data?.value;
       dispatch(setToken(token));
-      dispatch(setMessage({ message: "Login Success", type: true }));
+      dispatch(setMessage({ message: loginRes?.data?.message, type: true }));
       setTimeout(() => {
         dispatch(clearMessage());
-      }, 2000);
+      }, 2500);
       scrollToTop();
       // navigate("/");
     } else if (loginRes?.status === "rejected") {
-      dispatch(setMessage({ message: "Error", type: false }));
+      dispatch(
+        setMessage({ message: loginRes?.error?.data?.message, type: false })
+      );
       setTimeout(() => {
         dispatch(clearMessage());
-      }, 2000);
+      }, 3000);
     }
     // eslint-disable-next-line
   }, [loginRes?.status]);

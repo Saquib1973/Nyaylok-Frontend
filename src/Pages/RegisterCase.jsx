@@ -80,12 +80,14 @@ const RegisterCase = () => {
         prevCase: "",
       });
       setSelectedCase([]);
-      dispatch(setMessage({ message: "Case Registered", type: true }));
+      dispatch(
+        setMessage({ message: registerCaseResponse?.data?.message, type: true })
+      );
       setTimeout(() => {
         dispatch(clearMessage());
       }, 2000);
       scrollToTop();
-      navigate("/viewCases/1");
+      // navigate("/viewCases/1");
     } else if (registerCaseResponse?.status === "rejected") {
       dispatch(setMessage({ message: "Error", type: false }));
       setTimeout(() => {
@@ -94,10 +96,11 @@ const RegisterCase = () => {
     }
 
     //eslint-disable-next-line
-  }, [registerCaseResponse.status]);
+  }, [registerCaseResponse?.status]);
   for (var i = 0; i < ipcs?.data?.length; i += 1) {
     IPC.push(ipcs?.data[i]?.section);
   }
+  console.log(registerCaseResponse);
   return (
     <Wrapper>
       <form

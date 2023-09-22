@@ -20,7 +20,6 @@ function App() {
       <Header />
       <Routes>
         <Route path={`/`} element={<Home />} />
-
         <Route
           path={`/login`}
           element={
@@ -62,7 +61,14 @@ function App() {
           }
         />
         <Route path={`/aboutUs`} element={<AboutUs />} />
-        <Route path={`/user`} element={<UserInfo />} />
+        <Route
+          path={`/user`}
+          element={
+            <Private>
+              <UserInfo />
+            </Private>
+          }
+        />
         <Route path={`/404`} element={<Error />} />
         <Route path={`*`} element={<Navigate to="/404" />} />
       </Routes>

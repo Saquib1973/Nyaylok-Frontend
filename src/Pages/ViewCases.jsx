@@ -19,18 +19,17 @@ const ViewCases = () => {
 
   const caseCount = useGetCaseCountQuery();
   useEffect(() => {
-    getCase(params.page);
+    getCase(params?.page);
     // eslint-disable-next-line
-  }, [params.page]);
+  }, [params?.page]);
   const [countTotalCases, setCountTotalCases] = useState(null);
   useEffect(() => {
     setCountTotalCases(countCases());
     // eslint-disable-next-line
   }, [caseCount?.data?.response]);
-
   function countCases() {
     var count = 0;
-    for (var i = 0; i < caseCount?.data?.response.length; i += 1) {
+    for (var i = 0; i < caseCount?.data?.response?.length; i += 1) {
       count += Number(Object.values(caseCount?.data?.response[i]));
     }
     return count;
@@ -44,10 +43,10 @@ const ViewCases = () => {
         <div className="bg-gray-600 flex flex-col rounded-lg text-xs sm:text-sm md:text-base lg:text-xl bg-opacity-50 min-h-3/5 mx-2 mb-16 w-full  py-10  px-1 sm:px-8 gap-4 ">
           <div className="heading w-full text-center py-2">View Cases</div>
           <div className="w-auto mx-2 sm:mx-6 rounded-lg py-3 bg-opacity-80 flex  px-2 sm:px-5 bg-white text-black">
-            <div className="w-[25%]">CaseId</div>
-            <div className="w-[15%]">Status</div>
-            <div className="w-[40%]">Sections</div>
-            <div className="w-[20%]">Date of Filling</div>
+            <div className="w-[40%] md:w-[25%]">CaseId</div>
+            <div className="w-[30%] md:w-[15%]">Status</div>
+            <div className="hidden md:block md:w-[40%]">Sections</div>
+            <div className="w-[30%] md:w-[20%]">Date of Filling</div>
           </div>
           <div className="bg-gray-400 rounded-md h-full mx-2 sm:mx-6 w-auto bg-opacity-50">
             {caseResponse?.isFetching ||
@@ -76,13 +75,13 @@ const ViewCases = () => {
                           scrollToTop();
                         }}
                       >
-                        <div className="w-[25%] overflow-x-auto text-xs truncate">
+                        <div className="w-[40%] md:w-[25%] overflow-x-auto text-xs truncate">
                           {item.caseId}
                         </div>
-                        <div className="w-[15%] overflow-x-auto truncate">
+                        <div className="w-[30%] md:w-[15%] overflow-x-auto truncate">
                           {item.status}
                         </div>
-                        <div className="w-[40%] overflow-x-auto flex gap-2 flex-wrap">
+                        <div className="md:w-[40%] hidden md:flex overflow-x-auto gap-2 flex-wrap">
                           {item.IPCsections.map((i, indx) => {
                             return (
                               <p
@@ -94,7 +93,7 @@ const ViewCases = () => {
                             );
                           })}
                         </div>
-                        <div className="w-[20%] overflow-x-auto">
+                        <div className="w-[30%] md:w-[20%] overflow-x-auto">
                           {item.DOR.split("T")[0]
                             .split("-")
                             .reverse()
