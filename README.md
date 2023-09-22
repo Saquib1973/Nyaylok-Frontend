@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Nyaylok Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Ministry of Justice Case Management Website Frontend Repository, developed as part of the Smart India Hackathon (SIH). This innovative digital solution is designed to revolutionize the way cases are managed and ordered within the Indian judicial system.
 
-## Available Scripts
+## Run Locally / Installation
 
-In the project directory, you can run:
+You can either clone the website and run it on your device locally or visit the deployed link here : [nyaylok.onrender.com](https://nyaylok.onrender.com/)
 
-### `npm start`
+If you wish to run it on local environment then go ahead with the following process :
+Clone the project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+  git clone https://github.com/Saquib1973/Nyaylok-Frontend.git
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Go to the project directory
 
-### `npm test`
+```bash
+  cd Nyaylok-Frontend
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Now open this in VsCode or any Editor of choice .Then in terminal install all the dependencies.
 
-### `npm run build`
+```bash
+  npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After the installation of all the dependencies go ahead and run it on your local environment.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  npm run start
+  Open http://localhost:420 to view it in your browser.
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+While this is just the frontend so you might not be able to access the data coming from the backend on your local environment.
 
-### `npm run eject`
+## Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Case Status monitoring by user.
+- Updates about case status through sms.
+- User friendly
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Access Variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To run this project, you will need a judge account to access case registration or to view all cases at once .You dont need to have a registered account to view your own case status if you have its **id**.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+Employee Id : 2021UG2015
 
-## Learn More
+Password : 123
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Tech Stack
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Client:** React, Redux Toolkit , Redux Toolkit Query, TailwindCSS
 
-### Code Splitting
+**Server:** Node, Express , Mongoose
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Authors
 
-### Analyzing the Bundle Size
+- [@Vaibhav](https://github.com/hellovaibhav)
+- [@Saquib](https://github.com/Saquib1973)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🔗 Links
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![portfolio](https://img.shields.io/badge/deployed_Link-000?style=for-the-badge&logo=&logoColor=white)](https://nyaylok.onrender.com/)
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://saquib-ali.web.app/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/saquib-ali-4a3235219/)
+[![instagram](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/kooky._.cookie/)
